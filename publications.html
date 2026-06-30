@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Tushar Krishna</title>
+<style>
+  :root{
+    --bg:#fafbfc; --paper:#ffffff; --ink:#222831; --muted:#5a6472;
+    --line:#e6e8ec; --navy:#13284b; --navy2:#1d3a66; --accent:#1d3a66; --accent-soft:#e8edf4; --gold:#d4af37; --gold-d:#b08d1e;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:"Helvetica Neue",Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 26px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:3px solid var(--gold)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-family:var(--serif);font-weight:600;font-size:18px;color:#fff}
+  nav .links{display:flex;gap:22px;font-size:14.5px}
+  nav .links a{color:rgba(255,255,255,.9);font-weight:500}
+  nav .links a:hover{color:var(--gold);text-decoration:none}
+  nav .links a.active{color:var(--gold)}
+  @media(max-width:640px){nav .links a:not(.active){display:none}}
+  /* head */
+  header.h{padding:46px 0 22px}
+  .eyebrow{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px}
+  h1{font-family:var(--serif);font-size:44px;line-height:1.05;font-weight:600;letter-spacing:-.4px;margin-bottom:14px;color:var(--navy)}
+  .intro{font-size:17px;color:var(--muted);max-width:74ch}
+  .statline{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px}
+  .statline .s{font-size:14px;color:var(--muted)}
+  .statline .s b{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:600;margin-right:6px}
+  .asof{display:block;font-size:11.5px;color:#9a948a;margin-top:8px}
+  /* controls */
+  .controls{position:sticky;top:60px;z-index:40;background:var(--bg);padding:18px 0 14px;border-bottom:1px solid var(--line)}
+  .searchrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  #q{flex:1;min-width:220px;padding:11px 14px;border:1px solid var(--line);border-radius:9px;font-size:14.5px;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+  #q:focus{outline:none;border-color:var(--accent)}
+  .sortsel{padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);font-size:14px;color:var(--ink);font-family:var(--sans)}
+  /* research directions (clickable filter) */
+  .directions{padding:20px 0 8px;border-bottom:1px solid var(--line)}
+  .dirhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:13px}
+  .dirhead h2{font-family:var(--serif);font-size:20px;color:var(--navy)}
+  .dirhint{font-family:var(--sans);font-size:12.5px;color:var(--muted);font-weight:500;font-style:italic}
+  .clearbtn{font-size:12.5px;color:var(--accent);cursor:pointer;font-weight:700;visibility:hidden;white-space:nowrap}
+  .clearbtn.show{visibility:visible}
+  .dirgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:680px){.dirgrid{grid-template-columns:1fr}}
+  .dir{display:block;width:100%;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:11px 13px;transition:.13s;font-family:var(--sans)}
+  .dir:hover{border-color:#cfcabf}
+  .dirtop{display:flex;align-items:center;gap:8px}
+  .dirsw{width:11px;height:11px;border-radius:3px;flex:none}
+  .dirname{font-weight:700;font-size:14px;color:var(--ink)}
+  .dircount{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+  .dirdesc{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45}
+  /* list */
+  main{padding:8px 0 60px}
+  .yearhdr{display:inline-block;font-family:var(--serif);font-size:15px;color:#fff;font-weight:700;letter-spacing:.1em;background:linear-gradient(135deg,var(--navy),var(--navy2));border-left:4px solid var(--gold);padding:7px 24px 7px 14px;margin:34px 0 14px;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 50%,100% 100%,0 100%);box-shadow:0 2px 5px rgba(19,40,75,.18)}
+  .pub{display:grid;grid-template-columns:88px 1fr;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)}
+  @media(max-width:560px){.pub{grid-template-columns:1fr;gap:6px}}
+  .venue{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  .vbadge{font-size:12px;font-weight:800;letter-spacing:.02em;color:var(--ink);background:#efece4;border:1px solid var(--line);border-radius:6px;padding:3px 8px;white-space:nowrap}
+  .vtype{font-size:11px;letter-spacing:.02em;color:var(--muted);font-weight:700}
+  .rescount{font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+  .typelegend{margin-top:11px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+  .typelegend b{color:var(--ink);font-weight:700;margin-right:3px}
+  .typecode{display:inline-block;min-width:15px;text-align:center;font-weight:700;color:var(--accent);background:var(--accent-soft);border:1px solid #cfe7e1;border-radius:4px;padding:0 4px}
+  .ptitle{font-size:16px;font-weight:600;color:var(--ink);line-height:1.4}
+  .pauth{font-size:13.5px;color:var(--muted);margin-top:3px}
+  .pauth b{color:var(--ink);font-weight:700}
+  .pmeta{font-size:13px;color:var(--muted);margin-top:3px;font-style:italic}
+  .award{display:inline-block;font-size:11.5px;font-weight:700;color:#8a6d10;background:#fbf3d6;border:1px solid #ecdca0;border-radius:5px;padding:2px 8px;margin-top:7px;font-style:normal}
+  .ptags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .tag{font-size:11.5px;font-weight:600;border-radius:999px;padding:3px 10px;cursor:pointer;border:1px solid}
+  .empty{padding:50px 0;text-align:center;color:var(--muted);font-size:15px}
+  /* legend */
+  .legend{margin-top:8px;padding:22px 0 0}
+  .legend h2{font-family:var(--serif);font-size:22px;margin-bottom:14px}
+  .legrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 26px}
+  @media(max-width:680px){.legrid{grid-template-columns:1fr}}
+  .leg{display:flex;gap:11px;align-items:flex-start}
+  .leg .sw{width:13px;height:13px;border-radius:4px;margin-top:4px;flex:none}
+  .leg .lt b{font-size:14.5px}
+  .leg .lt p{font-size:13px;color:var(--muted)}
+  footer{background:var(--navy);color:rgba(255,255,255,.8);padding:26px 0;font-size:13.5px;margin-top:14px}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">Tushar Krishna</div>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="#" class="active">Publications</a>
+    <a href="http://synergy.ece.gatech.edu/" target="_blank">Research Group</a>
+  </div>
+</div></nav>
+
+<header class="h"><div class="wrap">
+  <h1>Publications</h1>
+  <p class="intro">A complete, filterable record of refereed papers, books, and patents. Use the search box, or click a research direction to filter. Each paper is tagged by one or more directions — many sit at the intersection of several.</p>
+  <div class="statline">
+    <div class="s"><b id="stat-count">0</b>publications</div>
+    <div class="s"><b>23,300+</b>citations</div>
+    <div class="s"><b>53</b>h-index</div>
+    <div class="s"><b>139</b>i10-index</div>
+    <div class="s"><a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ" target="_blank">Google Scholar ↗</a> · <a href="http://dblp.uni-trier.de/pers/hd/k/Krishna:Tushar" target="_blank">DBLP ↗</a></div>
+  </div>
+  <div class="asof">Citation metrics from Google Scholar · last updated June 2026 · refreshed monthly</div>
+</div></header>
+
+<div class="controls"><div class="wrap">
+  <div class="searchrow">
+    <input id="q" type="text" placeholder="Search title, author, or venue…" autocomplete="off">
+    <select class="sortsel" id="sort">
+      <option value="new">Newest first</option>
+      <option value="old">Oldest first</option>
+    </select>
+    <span class="rescount" id="rescount"></span>
+  </div>
+  <div class="typelegend"><b>Type</b> <span class="typecode">c</span> Conference <span class="typecode">j</span> Journal <span class="typecode">w</span> Workshop <span class="typecode">b</span> Book <span class="typecode">bc</span> Chapter <span class="typecode">p</span> Patent <span style="color:#c9ccd2">|</span> <b style="color:var(--ink)">*</b> equal contribution</div>
+</div></div>
+
+<div class="directions"><div class="wrap">
+  <div class="dirhead"><h2>Research directions <span class="dirhint">— click any topic to filter. Selecting multiple topics finds papers spanning all of them.</span></h2><span class="clearbtn" id="clearfilter">Clear filter ✕</span></div>
+  <div class="dirgrid" id="dirgrid"></div>
+</div></div>
+
+<main><div class="wrap">
+  <div id="list"></div>
+  <div class="empty" id="empty" style="display:none">No publications match your filters.</div>
+</div></main>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%">
+  <span>© 2026 Tushar Krishna · School of ECE, Georgia Institute of Technology</span>
+  <span id="foot-count"></span>
+</div></footer>
+
+<script>
+const TAGS = {
+  accel:   {label:"AI/ML Accelerators", color:"#0d7a6b", desc:"Accelerator microarchitecture, dataflows, mapping, sparse/dense GEMM, flexible interconnects, quantization-aware hardware."},
+  compai:  {label:"Compositional & Cognitive AI", color:"#6d4ed6", desc:"Neuro-symbolic, embodied/agentic, multi-model and cognitive AI systems and their hardware."},
+  dist:    {label:"Distributed AI Systems", color:"#2563c9", desc:"Distributed training and inference platforms, collective communication, scheduling, and networks for large-model training."},
+  llm:     {label:"Efficient LLM & Model Inference", color:"#c2410c", desc:"LLM/ViT serving, attention optimization, quantization, and private inference."},
+  mldesign:{label:"AI-Assisted Design", color:"#b3357a", desc:"ML, RL, and evolutionary search for hardware mapping, architecture, and design-space optimization."},
+  noc:     {label:"Interconnection & On-Chip Networks", color:"#3b4b8a", desc:"Networks-on-chip, deadlock freedom, routers, single-cycle traversal, topology and link design."},
+  sim:     {label:"Simulation & Benchmarking", color:"#b08400", desc:"Architecture simulators, analytical models, workload characterization, and benchmark suites."},
+  emerging:{label:"Emerging Tech & Packaging", color:"#2e8b57", desc:"Compute-in-memory, 3D/2.5D ICs, chiplets, interposers, wireless/photonic and RF interconnects."},
+  memory:  {label:"Memory & Virtual-Memory Systems", color:"#8a5a2b", desc:"TLBs, translation coherence, caches, and 3D-stacked memory."},
+  edge:    {label:"Edge & Embodied Computing", color:"#c0392b", desc:"On-device learning, neuroevolution, edge clusters, and deployment characterization."},
+  other:   {label:"Early / Other", color:"#777777", desc:"Earlier or cross-disciplinary work outside the main directions."}
+};
+
+const PUBS = [
+  {y:2026,v:"ISPASS",t:"conf",note:"Distinguished Artifact Honorable Mention",title:"MINISA: Minimal Instruction Set Architecture for Next-gen Reconfigurable Inference Accelerator",a:"Jianming Tong, Devansh Jain, Yujie Li, Charith Mendis, Tushar Krishna",tags:["accel"]},
+  {y:2026,v:"ASPLOS",t:"conf",title:"Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architectures",a:"Zishen Wan, Hanchen Yang, Jiayi Qian, Ritik Raj, Joongun Park, Chenyu Wang, Arijit Raychowdhury, Tushar Krishna",tags:["compai","accel"]},
+  {y:2026,v:"HPCA",t:"conf",title:"REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence",a:"Zishen Wan, Che-Kai Liu, Jiayi Qian, Hanchen Yang, Arijit Raychowdhury, Tushar Krishna",tags:["compai","accel"]},
+  {y:2026,v:"HPCA",t:"conf",title:"Leveraging ASIC AI Chips for Homomorphic Encryption",a:"Jianming Tong, Tianhao Huang, Jingtian Dang, Leo de Castro, Anirudh Itagi, Anupam Golder, Asra Ali, Jeremy Kun, Jevin Jiang, Arvind, G. Edward Suh, Tushar Krishna",tags:["accel","llm"]},
+  {y:2026,v:"HPCA",t:"conf",title:"SCALE: Tackling Communication Bottlenecks in Confidential Distributed Machine Learning",a:"Joongun Park, Yongqin Wang, Huan Xu, Hanjiang Wu, Mengyuan Li, Tushar Krishna",tags:["dist","llm"]},
+  {y:2026,v:"ASP-DAC",t:"conf",title:"Boosting Scalability and Performance: Macro Placement for Flexible 3D-Stacked ML Accelerators",a:"Jiawei Hu, Canlin Zhang, Pruek Vanna-Iampikul, Tushar Krishna, Sung Kyu Lim",tags:["emerging","accel"]},
+  {y:2026,v:"ISPASS",t:"conf",title:"Evaluating Cross-Architecture Performance Modeling of Distributed ML Workloads Using StableHLO",a:"Jonas Svedas, Nathan Laubeuf, Ryan Harvey, Arjun Singh, Changhai Man, Abubakr Nada, Tushar Krishna, James Myers, Debjyoti Bhattacharjee",tags:["dist","sim"]},
+  {y:2026,v:"ISPASS",t:"conf",title:"Towards System-2 AI: Workloads and Characterizations of Energy-Based Models",a:"Hanchen Yang, Jiayi Qian, Zishen Wan, Jingtian Dang, Ziwei Li, Yilun Du, Tushar Krishna",tags:["compai","sim"]},
+  {y:2026,v:"IEEE JSSC",t:"journal",title:"A 40-nm Programmable Heterogeneous SoC With 5.625/0.85 MB RRAM/SRAM for Accelerating Neuro-Symbolic AI Models",a:"Che-Kai Liu, Zishen Wan, Yi-Sheng Noh, Mohamed Ibrahim, Samuel Spetalnick, Tushar Krishna, Win-San Khwa, Ashwin S. Lele, Yu-Der Chih, Meng-Fan Chang, Arijit Raychowdhury",tags:["compai","accel","emerging"]},
+  {y:2026,v:"IEEE Micro",t:"journal",title:"Demystifying the Cost Versus Benefits of Sparse Large Language Model Acceleration",a:"Abhimanyu Rajeshkumar Bambhaniya, Sheng-Chun Kao, Geonhwa Jeong, Suvinay Subramanian, Amir Yazdanbakhsh, Tushar Krishna",tags:["accel","llm","sim"]},
+  {y:2025,v:"NeurIPS",t:"conf",title:"Win Fast or Lose Slow: Balancing Speed and Accuracy in Latency-Sensitive Decisions of LLMs",a:"Hao Kang, Qingru Zhang, Han Cai, Weiyuan Xu, Tushar Krishna, Yilun Du, Tsachy Weissman",tags:["llm"]},
+  {y:2025,v:"ICCV",t:"conf",title:"Ouromamba: A Data-Free Quantization Framework for Vision Mamba",a:"Akshat Ramachandran, Mingyu Lee, Huan Xu, Souvik Kundu, Tushar Krishna",tags:["llm"]},
+  {y:2025,v:"MICRO",t:"conf",title:"Characterizing the Efficiency of Distributed Training: A Power, Performance, and Thermal Perspective",a:"Seokjin Go, Joongun Park, Spandan More, Hanjiang Wu, Irene Wang, Aaron Jezghani, Tushar Krishna, Divya Mahajan",tags:["dist","sim"]},
+  {y:2025,v:"CPAL",t:"conf",title:"Progressive Gradient Flow for Robust N:M Sparsity Training in Transformers",a:"Abhimanyu Rajeshkumar Bambhaniya, Amir Yazdanbakhsh, Suvinay Subramanian, Sheng-Chun Kao, Shivani Agrawal, Utku Evci, Tushar Krishna",tags:["llm","accel"]},
+  {y:2025,v:"HASP@MICRO",t:"workshop",title:"SquareLoop: Explore Optimal Authentication Block Strategy for ML",a:"Jan Strzeszynski, Jianming Tong, Kyungmi Lee, Nathan Xiong, Angshuman Parashar, Joel S. Emer, Tushar Krishna, Mengjia Yan",tags:["accel"]},
+  {y:2025,v:"NeuS",t:"conf",title:"Efficient Processing of Neuro-Symbolic AI: A Tutorial and Cross-Layer Co-Design Case Study",a:"Zishen Wan, Che-Kai Liu, Hanchen Yang, Ritik Raj, Arijit Raychowdhury, Tushar Krishna",tags:["compai","accel"]},
+  {y:2025,v:"ISLPED",t:"conf",note:"Best Paper Award",title:"Accelerating LLM Inference with Flexible N:M Sparsity via A Fully Digital Compute-in-Memory Accelerator",a:"Akshat Ramachandran, Souvik Kundu, Arnab Raha, Shamik Kundu, Deepak K. Mathaikutty, Tushar Krishna",tags:["accel","llm","emerging"]},
+  {y:2025,v:"DAC",t:"conf",title:"NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for NeuroSymbolic AI",a:"Hanchen Yang, Zishen Wan, Ritik Raj, Joongun Park, Ziwei Li, Ananda Samajdar, Arijit Raychowdhury, Tushar Krishna",tags:["compai","accel"]},
+  {y:2025,v:"ISCA",t:"conf",title:"FRED: A Wafer-scale Fabric for 3D Parallel DNN Training",a:"Saeed Rashidi, William Won, Sudarshan Srinivasan, Puneet Gupta, Tushar Krishna",tags:["dist","noc","emerging"]},
+  {y:2025,v:"ISCA",t:"conf",title:"MicroScopiQ: Accelerating Foundational Models through Outlier-Aware Microscaling Quantization",a:"Akshat Ramachandran, Souvik Kundu, Tushar Krishna",tags:["accel","llm"]},
+  {y:2025,v:"IPDPS",t:"conf",title:"CELLO: Co-designing Schedule and Hybrid Implicit/Explicit Buffer for Complex Tensor Reuse",a:"Raveesh Garg, Michael Pellauer, Sivasankaran Rajamanickam, Tushar Krishna",tags:["accel"]},
+  {y:2025,v:"ISCAS",t:"conf",title:"Optimizing Sparse/Dense VEGETA Accelerator Performance with Microscaling Quantization",a:"Kazi Barria Nine, Connor Talley, Ajay Sharma Mandadi, Tushar Krishna, Arijit Raychowdhury",tags:["accel","llm"]},
+  {y:2025,v:"MLSys",t:"conf",title:"Enabling Unstructured Sparse Acceleration on Structured Sparse Accelerators",a:"Geonhwa Jeong, Po-An Tsai, Abhimanyu Rajeshkumar Bambhaniya, Stephen W. Keckler, Tushar Krishna",tags:["accel"]},
+  {y:2025,v:"MLSys",t:"conf",title:"TurboAttention: Efficient Attention Approximation for High-Throughput LLMs",a:"Hao Kang, Srikant Bharadwaj, James Hensman, Tushar Krishna, Victor Rühle, Saravan Rajmohan",tags:["llm"]},
+  {y:2025,v:"MLSys",t:"conf",title:"FlexInfer: Flexible LLM Inference with CPU Computations",a:"Seonjin Na, Geonhwa Jeong, Byung Hoon Ahn, Aaron Jezghani, Jeffrey Young, Christopher J. Hughes, Tushar Krishna, Hyesoon Kim",tags:["llm"]},
+  {y:2025,v:"MLSys",t:"conf",title:"AI Metropolis: Scaling Large Language Model-based Multi-Agent Simulation with Out-of-order Execution",a:"Zhiqiang Xie, Hao Kang, Ying Sheng, Tushar Krishna, Kayvon Fatahalian, Christos Kozyrakis",tags:["compai","llm","dist"]},
+  {y:2025,v:"ISPASS",t:"conf",title:"SCALE-Sim V3: a Modular Cycle-Accurate Systolic Accelerator Simulator for End-To-End System Analysis",a:"Ritik Raj, Sarbartha Banerjee, Nikhil Chandra, Zishen Wan, Jianming Tong, Ananda Samajdar, Tushar Krishna",tags:["sim","accel"]},
+  {y:2025,v:"ISPASS",t:"conf",title:"Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability",a:"Zishen Wan, Jiayi Qian, Yuhang Du, Jason Jabbour, Yilun Du, Yang Zhao, Arijit Raychowdhury, Tushar Krishna, Vijay Janapa Reddi",tags:["compai","edge","sim"]},
+  {y:2025,v:"ISPASS",t:"conf",title:"Exploring Constrained Dataflow Accelerators for Real-Time Multi-Task Multi-Model ML Workloads",a:"Jamin Seo, Jianming Tong, Tushar Krishna, Hyoukjun Kwon",tags:["accel","compai"]},
+  {y:2025,v:"ICLR",t:"conf",title:"LayerDAG: A Layerwise Autoregressive Diffusion Model for Directed Acyclic Graph Generation",a:"Mufei Li, Viraj Shitole, Eli Chien, Changhai Man, Zhaodong Wang, Srinivas Sridharan, Ying Zhang, Tushar Krishna, Pan Li",tags:["mldesign"]},
+  {y:2025,v:"ASPLOS",t:"conf",title:"ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents",a:"Zishen Wan, Yuhang Du, Mohamed Ibrahim, Jiayi Qian, Jason Jabbour, Yang (Katie) Zhao, Tushar Krishna, Arijit Raychowdhury, Vijay Janapa Reddi",tags:["compai","accel","edge"]},
+  {y:2025,v:"DATE",t:"conf",title:"AIrchitect v2: Learning the Hardware Accelerator Design Space through Unified Representations",a:"Jamin Seo*, Akshat Ramachandran*, Yu-Chuan Chuang, Anirudh Itagi, Tushar Krishna",tags:["mldesign"]},
+  {y:2025,v:"DATE",t:"conf",title:"Axon: A Novel Systolic Array Architecture for Improved Energy-Efficient GeMM and Conv Operation with On-Chip im2col",a:"Md Mizanur Rahaman Nayan, Ritik Raj, Shaik Gouse Basha, Tushar Krishna, Azad J. Naeemi",tags:["accel"]},
+  {y:2025,v:"HPCA",t:"conf",title:"CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design",a:"Zishen Wan*, Hanchen Yang*, Ritik Raj*, Chaojian Li, Ananda Samajdar, Yingyan (Celine) Lin, Arijit Raychowdhury, Tushar Krishna",tags:["compai","accel"]},
+  {y:2025,v:"IEEE Micro",t:"journal",title:"Toward a Standardized Representation for Deep Learning Collective Algorithms",a:"Jinsun Yoo, William Won, Meghan Cowan, Nan Jiang, Benjamin Klenk, Srinivas Sridharan, Tushar Krishna",tags:["dist"]},
+  {y:2024,v:"ENLSP@NeurIPS",t:"workshop",title:"GEAR: An Efficient Error Reduction Framework for KV Cache Compression in LLM Inference",a:"Hao Kang, Qingru Zhang, Souvik Kundu, Geonhwa Jeong, Zaoxing Liu, Tushar Krishna, Tuo Zhao",tags:["llm"]},
+  {y:2024,v:"ISPASS",t:"conf",title:"Leveraging Memory Expansion to Accelerate Large-Scale DL Training",a:"Divya Kiran Kadiyala, Saeed Rashidi, Taekyung Heo, Abhimanyu Bambhaniya, Tushar Krishna, Alexandros Daglis",tags:["dist","memory"]},
+  {y:2024,v:"ICCAD",t:"conf",title:"Thinking and Moving: An Efficient Computing Approach for Integrated Task and Motion Planning in Cooperative Embodied AI Systems",a:"Zishen Wan, Yuhang Du, Mohamed Ibrahim, Yang (Katie) Zhao, Tushar Krishna, Arijit Raychowdhury",tags:["compai","edge"]},
+  {y:2024,v:"IA³ @ SC",t:"workshop",title:"Enhancing Scalability and Performance in Influence Maximization with Optimized Parallel Processing",a:"Hanjiang Wu, Huan Xu, Joongun Park, Jesmin Jahan Tithi, Fabio Checconi, Jordi Wolfson-Pou, Fabrizio Petrini, Tushar Krishna",tags:["dist"]},
+  {y:2024,v:"MICRO",t:"conf",title:"TACOS: Topology-Aware Collective Algorithm Synthesizer for Distributed Machine Learning",a:"William Won, Midhilesh Elavazhagan, Sudarshan Srinivasan, Swati Gupta, Tushar Krishna",tags:["dist"]},
+  {y:2024,v:"IISWC",t:"conf",title:"Understanding Performance Implications of LLM Inference on CPUs",a:"Seonjin Na, Geonhwa Jeong, Byunghoon Ahn, Jeffrey Young, Tushar Krishna, Hyesoon Kim",tags:["llm","sim"]},
+  {y:2024,v:"ECCV",t:"conf",title:"CLAMP-ViT: Contrastive Data-Free Learning for Adaptive Post-Training Quantization of ViTs",a:"Akshat Ramachandran, Souvik Kundu, Tushar Krishna",tags:["llm"]},
+  {y:2024,v:"HotI",t:"conf",title:"Towards a Standardized Representation for Deep Learning Collective Algorithms",a:"Jinsun Yoo, William Won, Meghan Cowan, Nan Jiang, Benjamin Klenk, Srinivas Sridharan, Tushar Krishna",tags:["dist"]},
+  {y:2024,v:"ISCA",t:"conf",title:"FEATHER: A Reconfigurable Accelerator with Data Reordering Support for Low-Cost On-Chip Dataflow Switching",a:"Jianming Tong, Anirudh Itagi, Prasanth Chatarasi, Tushar Krishna",tags:["accel","noc"]},
+  {y:2024,v:"DAC",t:"conf",title:"Algorithm-Hardware Co-Design of Distribution-Aware Logarithmic-Posit Encodings for Efficient DNN Inference",a:"Akshat Ramachandran, Zishen Wan, Geonhwa Jeong, John Gustafson, Tushar Krishna",tags:["accel","llm"]},
+  {y:2024,v:"MLSys",t:"conf",title:"SmartPAF: Accurate Low-Degree Polynomial Approximation of Non-polynomial Operators for Fast Private Inference in Homomorphic Encryption",a:"Jianming Tong*, Jingtian Dang*, Anupam Golder, Cong Hao, Arijit Raychowdhury, Tushar Krishna",tags:["llm","accel"]},
+  {y:2024,v:"ISPASS",t:"conf",title:"LIBRA: Enabling Workload-aware Multi-dimensional Network Topology Optimization for Distributed Training of Large AI Models",a:"William Won, Saeed Rashidi, Sudarshan Srinivasan, Tushar Krishna",tags:["dist","noc"]},
+  {y:2024,v:"ISPASS",t:"conf",title:"Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI",a:"Zishen Wan, Che-Kai Liu, Hanchen Yang, Ritik Raj, Chaojian Li, Haoran You, Yonggan Fu, Cheng Wan, Ananda Samajdar, Yingyan (Celine) Lin, Tushar Krishna, Arijit Raychowdhury",tags:["compai","sim"]},
+  {y:2024,v:"DATE",t:"conf",title:"H3DFact: Heterogeneous 3D Integrated CIM for Factorization with Holographic Perceptual Representations",a:"Zishen Wan*, Che-Kai Liu*, Mohamed Ibrahim, Hanchen Yang, Samuel Spetalnick, Tushar Krishna, Arijit Raychowdhury",tags:["compai","emerging"]},
+  {y:2024,v:"IEEE T-Radar",t:"journal",title:"Real-time Digital RF Emulation – II: A Near-Memory Custom Accelerator",a:"Xiangyu Mao, M. Mukherjee, N. Mizanur Rahman, C. DeLude, J. Driscoll, S. Sharma, P. Behnam, U. Kamal, J. Woo, D. Kim, S. Khan, Jianming Tong, J. Seo, P. Sinha, M. Swaminathan, Tushar Krishna, S. Pande, J. Romberg, S. Mukhopadhyay",tags:["accel","emerging"]},
+  {y:2024,v:"IEEE TCASAI",t:"journal",title:"Towards Efficient Neuro-Symbolic AI: From Workload Characterization to Hardware Architecture",a:"Zishen Wan, Che-Kai Liu, Hanchen Yang, Ritik Raj, Chaojian Li, Haoran You, Yonggan Fu, Cheng Wan, Sixu Li, Youbin Kim, Ananda Samajdar, Yingyan (Celine) Lin, Mohamed Ibrahim, Jan M. Rabaey, Tushar Krishna, Arijit Raychowdhury",tags:["compai","sim"]},
+  {y:2023,v:"IEEE CAL",t:"journal",title:"Mitigating Timing-Based NoC Side-Channel Attacks With LLC Remapping",a:"Anurag Kar, Xueyang Liu, Yonghae Kim, Gururaj Saileshwar, Hyesoon Kim, Tushar Krishna",tags:["noc","memory"]},
+  {y:2023,v:"ACM JETC",t:"journal",title:"STIFT: A Spatio-Temporal Integrated Folding Tree for Efficient Reductions in Flexible DNN Accelerators",a:"Francisco Muñoz-Martínez, José L. Abellán, Manuel E. Acacio, Tushar Krishna",tags:["accel","noc"]},
+  {y:2023,v:"IEEE TVLSI",t:"journal",title:"On Continuing DNN Accelerator Architecture Scaling Using Tightly Coupled Compute-on-Memory 3-D ICs",a:"Gauthaman Murali, Aditya Iyer, Lingjun Zhu, Jianming Tong, Francisco Muñoz-Martínez, Srivatsa Rangachar Srinivasa, Tanay Karnik, Tushar Krishna, Sung Kyu Lim",tags:["accel","emerging"]},
+  {y:2023,v:"IEEE SENSORS",t:"conf",title:"SNATCH: Stealing Neural Network Architecture from ML Accelerator in Intelligent Sensors",a:"Sudarshan Sharma, Uday Kamal, Jianming Tong, Tushar Krishna, Saibal Mukhopadhyay",tags:["accel","edge"]},
+  {y:2023,v:"ISPASS",t:"conf",title:"Characterization of Data Compression in Datacenters",a:"Geonhwa Jeong, Bikash Sharma, Nick Terrell, Abhishek Dhanotia, Zhiwei Zhao, Niket Agarwal, Arun Kejariwal, Tushar Krishna",tags:["sim"]},
+  {y:2023,v:"ISPASS",t:"conf",title:"ASTRA-sim2.0: Modeling Hierarchical Networks and Disaggregated Systems for Large-model Training at Scale",a:"William Won, Taekyung Heo, Saeed Rashidi, Srinivas Sridharan, Sudarshan Srinivasan, Tushar Krishna",tags:["dist","sim","noc"]},
+  {y:2023,v:"NOCS",t:"conf",note:"Best Paper Nominee",title:"SPOCK: Reverse Packet Traversal for Deadlock Recovery",a:"Zeyu Chen, Ankur Bindal, Vaidehi Garg, Tushar Krishna",tags:["noc"]},
+  {y:2023,v:"MLSys",t:"conf",title:"XRBench: An Extended Reality (XR) Machine Learning Benchmark Suite for the Metaverse",a:"Hyoukjun Kwon, Krishnakumar Nair, Jamin Seo, Jason Yik, Debabrata Mohapatra, Dongyuan Zhan, Jinook Song, Peter Capak, Peizhao Zhang, Peter Vajda, Colby Banbury, Mark Mazumder, Liangzhen Lai, Ashish Sirasao, Tushar Krishna, Harshit Khaitan, Vikas Chandra, Vijay Janapa Reddi",tags:["sim","edge","compai"]},
+  {y:2023,v:"MLSys",t:"conf",title:"Subgraph-Stationary Hardware-Software Inference Co-Design",a:"Payman Behnam, Jianming Tong, Alind Khare, Yangyu Chen, Yue Pan, Pranav Gadikar, Abhimanyu Rajeshkumar Bambhaniya, Tushar Krishna, Alexey Tumanov",tags:["accel","edge"]},
+  {y:2023,v:"IMS",t:"conf",title:"FPGA-Based High-Performance Real-Time Emulation of Radar System using Direct Path Compute Model",a:"X. Mao, M. Mukherjee, N. M. Rahman, U. Kamal, S. Sharma, P. Behnam, J. Tong, J. Woo, C. DeLude, J. Driscoll, J. Seo, S. Pande, T. Krishna, J. Romberg, M. Swaminathan, S. Mukhopadhyay",tags:["accel","emerging"]},
+  {y:2023,v:"RadarConf",t:"conf",title:"A High Performance Computing Architecture for Real-Time Digital Emulation of RF Interactions",a:"M. Mukherjee, N. M. Rahman, C. DeLude, J. Driscoll, U. Kamal, J. Woo, J. Seo, S. Sharma, X. Mao, P. Behnam, S. Khan, D. Kim, J. Tong, P. Sinha, S. Pande, T. Krishna, J. Romberg, M. Swaminathan, S. Mukhopadhyay",tags:["accel","emerging"]},
+  {y:2023,v:"DATE",t:"conf",title:"Proteus: HLS-based NoC Generator and Simulator",a:"Abhimanyu Rajeshkumar Bambhaniya, Yangyu Chen, Anshuman, Rohan Banerjee, Tushar Krishna",tags:["noc","sim"]},
+  {y:2023,v:"DATE",t:"conf",title:"AIRCHITECT: Automating Hardware Architecture and Mapping Optimization",a:"Ananda Samajdar, Jan Moritz Joseph, Tushar Krishna",tags:["mldesign"]},
+  {y:2023,v:"ASPLOS",t:"conf",title:"Flexagon: A Multi-Dataflow Sparse-Sparse Matrix Multiplication Accelerator for Efficient DNN Processing",a:"Francisco Muñoz-Martinez, Raveesh Garg, Michael Pellauer, Jose L. Abellan, Manuel E. Acacio, Tushar Krishna",tags:["accel"]},
+  {y:2023,v:"ASPLOS",t:"conf",title:"FLAT: An Optimized Dataflow for Mitigating Attention Bottlenecks",a:"Sheng-Chun Kao, Suvinay Subramanian, Gaurav Agrawal, Amir Yazdanbakhsh, Tushar Krishna",tags:["accel","llm"]},
+  {y:2023,v:"HPCA",t:"conf",title:"VEGETA: Vertically-Integrated Extensions for Sparse/Dense GEMM Tile Acceleration on CPUs",a:"Geonhwa Jeong, Sana Damani, Abhimanyu Bambhaniya, Eric Qin, Christopher J. Hughes, Sreenivas Subramoney, Hyesoon Kim, Tushar Krishna",tags:["accel"]},
+  {y:2023,v:"AAAI",t:"conf",title:"Efficient Distributed Inference of Deep Neural Networks via Restructuring and Pruning",a:"Afshin Abdi, Saeed Rashidi, Tushar Krishna, Faramarz Fekri",tags:["dist","llm"]},
+  {y:2023,v:"IEEE Micro",t:"journal",title:"Hardware-Software Co-Design for Real-Time Latency-Accuracy Navigation in Tiny Machine Learning Applications",a:"Payman Behnam, Jianming Tong, Alind Khare, Yangyu Chen, Yue Pan, Pranav Gadikar, Abhimanyu Bambhaniya, Tushar Krishna, Alexey Tumanov",tags:["accel","edge"]},
+  {y:2023,v:"ACM TACO",t:"journal",title:"TNT: A Modular Approach to Traversing Physically Heterogeneous NoCs at Bare-wire Latency",a:"Gokul Subramanian Ravi, Tushar Krishna, Mikko Lipasti",tags:["noc"]},
+  {y:2022,v:"ISPASS",t:"conf",title:"Understanding Data Compression in Warehouse-Scale Datacenter Services",a:"Geonhwa Jeong, Bikash Sharma, Nick Terrell, Abhishek Dhanotia, Zhiwei Zhao, Niket Agarwal, Arun Kejariwal, Tushar Krishna",tags:["sim"]},
+  {y:2022,v:"IISWC",t:"conf",title:"Demystifying Map Space Exploration for NPUs",a:"Sheng-Chun Kao, Angshuman Parashar, Po-An Tsai, Tushar Krishna",tags:["accel","sim","mldesign"]},
+  {y:2022,v:"Middleware",t:"conf",note:"Best Paper Award",title:"MicroEdge: A Low-Cost Edge Cluster System Architecture for Scalable Camera Processing",a:"Difei Cao*, Jinsun Yoo*, Zhuangdi Xu, Enrique Saurez, Harshit Gupta, Tushar Krishna, Umakishore Ramachandran",tags:["edge"]},
+  {y:2022,v:"HotI",t:"conf",title:"Impact of RoCE Congestion Control Policies on Distributed Training of DNNs",a:"Tarannum Khan, Saeed Rashidi, Pallavi Shurpali, Aditya Akella, Tushar Krishna, Srinivas Sridharan",tags:["dist","noc"]},
+  {y:2022,v:"DAC",t:"conf",title:"Self Adaptive Reconfigurable Arrays (SARA): Learning Flexible GEMM Accelerator Configuration and Mapping-space using ML",a:"Ananda Samajdar, Eric Qin, Michael Pellauer, Tushar Krishna",tags:["accel","mldesign"]},
+  {y:2022,v:"ISCA",t:"conf",title:"Themis: A Network Bandwidth-Aware Collective Scheduling Policy for Distributed Training of DL Models",a:"Saeed Rashidi, William Won, Sudarshan Srinivasan, Srinivas Sridharan, Tushar Krishna",tags:["dist"]},
+  {y:2022,v:"SIGMETRICS",t:"conf",title:"A Formalism of DNN Accelerator Flexibility",a:"Sheng-Chun Kao, Hyoukjun Kwon, Michael Pellauer, Angshuman Parashar, Tushar Krishna",tags:["accel","sim"]},
+  {y:2022,v:"IPDPS",t:"conf",note:"Best Paper Nominee",title:"Understanding the Design-Space of Sparse/Dense Multiphase GNN Dataflows on Spatial Accelerators",a:"Raveesh Garg, Eric Qin, Francisco Muñoz-Martínez, Robert Guirado, Akshay Jain, Sergi Abadal, José L. Abellán, Manuel E. Acacio, Eduard Alarcón, Sivasankaran Rajamanickam, Tushar Krishna",tags:["accel"]},
+  {y:2022,v:"DATE",t:"conf",title:"DiGamma: A Domain-aware Genetic Algorithm for HW-Mapping Co-optimization for DNN Accelerators",a:"Sheng-Chun Kao, Michael Pellauer, Angshuman Parashar, Tushar Krishna",tags:["mldesign","accel"]},
+  {y:2022,v:"HPCA",t:"conf",title:"MAGMA: An Optimization Framework for Mapping Multiple DNNs on Multiple Accelerator Cores",a:"Sheng-Chun Kao, Tushar Krishna",tags:["mldesign","accel"]},
+  {y:2022,v:"HPCA",t:"conf",title:"Stay in your Lane: A NoC with Low-overhead Multi-packet Bypassing",a:"Hossein Farrokhbakht, Paul Gratz, Tushar Krishna, Joshua San Miguel, Natalie Enright Jerger",tags:["noc"]},
+  {y:2021,v:"IEEE TC",t:"journal",title:"Efficiently Solving Partial Differential Equations in a Partially Reconfigurable Specialized Hardware",a:"Bahar Asgari, Ramyad Hadidi, Tushar Krishna, Hyesoon Kim, Sudhakar Yalamanchili",tags:["accel"]},
+  {y:2021,v:"NANOCOM",t:"conf",title:"Technology-aware Router Architectures for On-Chip-Networks in Heterogeneous Technologies",a:"Lennart Bamberg, Tushar Krishna, Jan Moritz Joseph",tags:["noc","emerging"]},
+  {y:2021,v:"DAC",t:"conf",title:"RASA: Efficient Register-Aware Systolic Array Matrix Engine for CPU",a:"Geonhwa Jeong, Eric Qin, Ananda Samajdar, Christopher Hughes, Sreenivas Subramoney, Hyesoon Kim, Tushar Krishna",tags:["accel"]},
+  {y:2021,v:"IISWC",t:"conf",title:"STONNE: Enabling Cycle-Level Microarchitectural Simulation for DNN Inference Accelerators",a:"Francisco Muñoz-Martinez, Jose L. Abellan, Manuel E. Acacio, Tushar Krishna",tags:["sim","accel"]},
+  {y:2021,v:"NOCS",t:"conf",note:"Best Paper Nominee",title:"A Novel Network Fabric for Efficient Spatio-Temporal Reduction in Flexible DNN Accelerators",a:"Francisco Muñoz-Martinez, Jose L. Abellan, Manuel E. Acacio, Tushar Krishna",tags:["noc","accel"]},
+  {y:2021,v:"NOCS",t:"conf",title:"DUB: Dynamic Underclocking and Bypassing in Network-on-Chip for Heterogeneous GPU Workloads",a:"Srikant Bharadwaj, Shomit Das, Yasuko Eckert, Mark Oskin, Tushar Krishna",tags:["noc"]},
+  {y:2021,v:"SC",t:"conf",note:"Best Paper Nominee",title:"SEEC: Stochastic Escape Express Channel",a:"Mayank Parasar, Natalie Enright Jerger, Paul Gratz, Joshua San Miguel, Tushar Krishna",tags:["noc"]},
+  {y:2021,v:"PACT",t:"conf",title:"Union: A Unified HW-SW Co-Design Ecosystem in MLIR for Evaluating Tensor Operators on Spatial Accelerators",a:"Geonhwa Jeong, Gokcen Kestor, Prasanth Chatarasi, Angshuman Parashar, Po-An Tsai, Siva Rajamanickam, Roberto Gioiosa, Tushar Krishna",tags:["accel","sim"]},
+  {y:2021,v:"IMS",t:"conf",title:"A Configurable Architecture for Efficient Sparse FIR Computation in Real-time Radio Frequency Systems",a:"Jamin Seo, Mandovi Mukherjee, Nael Mizanur Rahman*, Jianming Tong, Coleman DeLude, Tushar Krishna, Justin Romberg, Saibal Mukhopadhyay",tags:["accel","emerging"]},
+  {y:2021,v:"ISCA",t:"conf",title:"Enabling Compute-Communication Overlap in Distributed Training Platforms",a:"Saeed Rashidi, Srinivas Sridharan, Sudarshan Srinivasan, Matthew Denton, Amoghavarsha Suresh, Jade Nie, Tushar Krishna",tags:["dist"]},
+  {y:2021,v:"IPDPS",t:"conf",title:"Extending Sparse Tensor Accelerators to Support Multiple Compression Formats",a:"Eric Qin, Geonhwa Jeong, William Won, Sheng-Chun Kao, Hyoukjun Kwon, Sudarshan Srinivasan, Dipankar Das, Gordon E. Moon, Sivasankaran Rajamanickam, Tushar Krishna",tags:["accel"]},
+  {y:2021,v:"ISQED",t:"conf",title:"Architecture, Dataflow and Physical Design Implications of 3D-ICs for DNN-Accelerators",a:"Jan Moritz Joseph, Ananda Samajdar, Lingjun Zhu, Rainer Leupers, Sung Kyu Lim, Thilo Pionteck, Tushar Krishna",tags:["accel","emerging"]},
+  {y:2021,v:"ISPASS",t:"conf",title:"E3: A HW/SW Co-design Neuroevolution Platform for Autonomous Learning in Edge Devices",a:"Sheng-Chun Kao, Tushar Krishna",tags:["edge"]},
+  {y:2021,v:"HPCA",t:"conf",title:"Pitstop: Enabling a Virtual Network Free Network-on-Chip",a:"Hossein Farrokhbakht, Henry Kao, Kamran Hasan, Paul Gratz, Tushar Krishna, Joshua San Miguel, Natalie Enright Jerger",tags:["noc"]},
+  {y:2021,v:"HPCA",t:"conf",title:"Heterogeneous Dataflow Accelerators for Multi-DNN Workloads",a:"Hyoukjun Kwon, Liangzhen Lai, Michael Pellauer, Yu-Hsin Chen, Tushar Krishna, Vikas Chandra",tags:["accel","compai"]},
+  {y:2021,v:"ASP-DAC",t:"conf",title:"Dataflow-Architecture Co-Design for 2.5D DNN Accelerators using Wireless Network-on-Package",a:"Robert Guirado, Hyoukjun Kwon, Sergi Abadal, Eduard Alarcon, Tushar Krishna",tags:["accel","emerging","noc"]},
+  {y:2021,v:"ASP-DAC",t:"conf",note:"Best Paper Nominee",title:"Bridging the Frequency Gap in Heterogeneous 3D SoCs through Technology-Specific NoC Router Architecture",a:"Jan Moritz Joseph, Lennart Bamberg, Geonhwa Jeong, Ruei-Ting Chien, Rainer Leupers, Alberto Garcia-Ortiz, Tushar Krishna, Thilo Pionteck",tags:["noc","emerging"]},
+  {y:2021,v:"ACM TACO",t:"journal",title:"Marvel: A Data-Centric Approach for Mapping Deep Learning Operators on Spatial Accelerators",a:"Prasanth Chatarasi, Hyoukjun Kwon, Angshuman Parashar, Michael Pellauer, Tushar Krishna, Vivek Sarkar",tags:["accel","mldesign"]},
+  {y:2021,v:"IEEE CAL",t:"journal",title:"STONNE: Enabling Cycle-Level Microarchitectural Simulation for DNN Inference Accelerators",a:"Francisco Muñoz-Martinez, Jose L. Abellan, Manuel E. Acacio, Tushar Krishna",tags:["sim","accel"]},
+  {y:2021,v:"IEEE TPDS",t:"journal",title:"Evaluating Spatial Accelerator Architectures with Tiled Matrix-Matrix Multiplication",a:"Gordon E. Moon, Hyoukjun Kwon, Geonhwa Jeong, Prasanth Chatarasi, Sivasankaran Rajamanickam, Tushar Krishna",tags:["accel","sim"]},
+  {y:2021,v:"IEEE TVLSI",t:"journal",title:"Clock Delivery Network Design and Analysis for Interposer-Based 2.5-D Heterogeneous Systems",a:"Gauthaman Murali, Heechun Park, Eric Qin, Hakki Mert Torun, Majid Ahadi Dolatsara, Madhavan Swaminathan, Tushar Krishna, Sung Kyu Lim",tags:["emerging"]},
+  {y:2021,v:"IEEE CAL",t:"journal",title:"Flexion: A Quantitative Metric for Flexibility in DNN Accelerators",a:"Hyoukjun Kwon, Michael Pellauer, Angshuman Parashar, Tushar Krishna",tags:["accel","sim"]},
+  {y:2021,v:"Springer (chapter)",t:"chapter",title:"Interconnect Modeling for Homogeneous and Heterogeneous Multiprocessors",a:"Srikant Bharadwaj, Tushar Krishna",tags:["noc","emerging"]},
+  {y:2020,v:"VLSI-SoC",t:"conf",title:"Statistical Array Allocation and Partitioning for Compute In-Memory Fabrics",a:"Brian Crafton, Samuel Spetalnick, Gauthaman Murali, Tushar Krishna, Sung Kyu Lim, Arijit Raychowdhury",tags:["emerging","accel"]},
+  {y:2020,v:"ICCAD",t:"conf",title:"GAMMA: Automating the HW Mapping of DNN Models on Accelerators via Genetic Algorithm",a:"Sheng-Chun Kao, Tushar Krishna",tags:["mldesign","accel"]},
+  {y:2020,v:"MICRO",t:"conf",title:"ConfuciuX: Autonomous Hardware Resource Assignment for DNN Accelerators using Reinforcement Learning",a:"Sheng-Chun Kao, Geonhwa Jeong, Tushar Krishna",tags:["mldesign","accel"]},
+  {y:2020,v:"VLSI-SoC",t:"conf",note:"Best Paper Award",title:"Breaking Barriers: Maximizing Array Utilization for Compute In-Memory Fabrics",a:"Brian Crafton, Samuel Spetalnick, Gauthaman Murali, Tushar Krishna, Sung-Kyu Lim, Arijit Raychowdhury",tags:["emerging","accel"]},
+  {y:2020,v:"HotI",t:"conf",title:"Scalable Distributed Training of Recommendation Models: An ASTRA-SIM + NS3 case-study with TCP/IP transport",a:"Saeed Rashidi, Pallavi Shurpali, Srinivas Sridharan, Naader Hassani, Dheevatsa Mudigere, Krishnakumar Nair, Misha Smelyanski, Tushar Krishna",tags:["dist","sim"]},
+  {y:2020,v:"ISPASS",t:"conf",title:"ASTRA-SIM: Enabling SW/HW Co-Design Exploration for Distributed DL Training Platforms",a:"Saeed Rashidi, Srinivas Sridharan, Sudarshan Srinivasan, Tushar Krishna",tags:["dist","sim"]},
+  {y:2020,v:"ISPASS",t:"conf",title:"A Systematic Methodology for Characterizing Scalability of DNN Accelerators using SCALE-Sim",a:"Ananda Samajdar, Jan Moritz Joseph, Yuhao Zhu, Paul Whatmough, Matthew Mattina, Tushar Krishna",tags:["sim","accel"]},
+  {y:2020,v:"ISPASS",t:"conf",title:"CLAN: Continuous Learning using Asynchronous NeuroEvolution on Commodity Edge Devices",a:"Parth Mannan, Ananda Samajdar, Tushar Krishna",tags:["edge"]},
+  {y:2020,v:"DAC",t:"conf",title:"Kite: A Family of Heterogeneous Interposer Topologies Enabled via Accurate Interconnect Modeling",a:"Srikant Bharadwaj, Jieming Yin, Bradford M. Beckmann, Tushar Krishna",tags:["noc","emerging"]},
+  {y:2020,v:"DAC",t:"conf",title:"Co-Exploration of Neural Architectures and Heterogeneous ASIC Accelerator Designs Targeting Multiple Tasks",a:"Lei Yang, Zheyu Yan, Meng Li, Hyoukjun Kwon, Liangzhen Lai, Tushar Krishna, Vikas Chandra, Weiwen Jiang, Yiyu Shi",tags:["mldesign","accel"]},
+  {y:2020,v:"HPCA",t:"conf",note:"Best Paper Award",title:"SIGMA: A Sparse and Irregular GEMM Accelerator with Flexible Interconnects for DNN Training",a:"Eric Qin, Ananda Samajdar, Hyoukjun Kwon, Vineet Nadella, Sudarshan Srinivasan, Dipankar Das, Bharat Kaul, Tushar Krishna",tags:["accel","noc"]},
+  {y:2020,v:"HPCA",t:"conf",title:"DRAIN: Deadlock Removal for Arbitrary Irregular Networks",a:"Mayank Parasar, Hossein Farrokhbakht, Natalie Enright Jerger, Paul Gratz, Tushar Krishna, Joshua San Miguel",tags:["noc"]},
+  {y:2020,v:"HPCA",t:"conf",title:"ALRESCHA: A Lightweight Reconfigurable Sparse-Computation Accelerator",a:"Bahar Asgari, Ramyad Hadidi, Tushar Krishna, Hyesoon Kim, Sudhakar Yalamanchili",tags:["accel"]},
+  {y:2020,v:"IEEE TVLSI",t:"journal",title:"Architecture, Chip, and Package Co-design Flow for 2.5D IC Design Enabling Heterogeneous IP Reuse",a:"Jinwoo Kim, Gauthaman Murali, Heechun Park, Eric Qin, Hyoukjun Kwon, Venkata Chaitanya Krishna Chekuri, Nael Mizanur Rahman, Nihar Dasari, Arvind Singh, Minah Lee, Hakki Mert Torun, Kallol Roy, Madhavan Swaminathan, Saibal Mukhopadhyay, Tushar Krishna, Sung Kyu Lim",tags:["emerging"]},
+  {y:2020,v:"ACM TACO",t:"journal",title:"EcoTLB: Eventually Consistent TLBs",a:"Steffen Maass, Mohan Kumar, Taesoo Kim, Tushar Krishna, Abhishek Bhattacharjee",tags:["memory"]},
+  {y:2020,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"MAESTRO: A Data-Centric Approach to Understand Reuse, Performance, and Hardware Cost of DNN Mappings",a:"Hyoukjun Kwon, Prasanth Chatarasi, Michael Pellauer, Angshuman Parashar, Vivek Sarkar, Tushar Krishna",tags:["accel","sim"]},
+  {y:2020,v:"Synthesis Lectures",t:"book",title:"Data Orchestration in Deep Learning Accelerators",a:"Tushar Krishna, Michael Pellauer, Angshuman Parashar, Hyoukjun Kwon, Ananda Samajdar",tags:["accel"]},
+  {y:2020,v:"IRDS (chapter)",t:"chapter",title:"Application Benchmarking",a:"Geoffrey Burr, Tom Conte, Paolo Gargini, Vladimir Getov, Yoshihiro Hayashi, Takeshi Iwashita, Vijay Janapa Reddi, Masaaki Kondo, Tushar Krishna, Peter M. Kogge, Anoop Nair, Dam Sunwoo, Josep Torrellas, Peter Torelli",tags:["sim"]},
+  {y:2019,v:"NOCS",t:"conf",title:"Reinforcement Learning Based Interconnection Routing for Adaptive Traffic Optimization",a:"Sheng-Chun Kao, Chao-Han Huck Yang, Pin-Yu Chen, Xiaoli Ma, Tushar Krishna",tags:["noc","mldesign"]},
+  {y:2019,v:"ICECS",t:"conf",title:"Understanding the Impact of On-chip Communication on DNN Accelerator Performance",a:"Robert Guirado, Hyoukjun Kwon, Eduard Alarcon, Sergi Abadal, Tushar Krishna",tags:["noc","accel","sim"]},
+  {y:2019,v:"IISWC",t:"conf",note:"Best Paper Nominee",title:"Characterizing the Deployment of Deep Neural Networks on Commercial Edge Devices",a:"Ramyad Hadidi, Jiashen Cao, Yilun Xie, Bahar Asgari, Tushar Krishna, Hyesoon Kim",tags:["edge","sim"]},
+  {y:2019,v:"MICRO",t:"conf",note:"IEEE Micro Top Picks",title:"Understanding Reuse, Performance, and Hardware Cost of DNN Dataflows: A Data-Centric Approach",a:"Hyoukjun Kwon, Prasanth Chatarasi, Michael Pellauer, Angshuman Parashar, Vivek Sarkar, Tushar Krishna",tags:["accel","sim"]},
+  {y:2019,v:"MICRO",t:"conf",title:"SWAP: Synchronized Weaving of Adjacent Packets for Network Deadlock Resolution",a:"Mayank Parasar, Natalie Enright Jerger, Paul Gratz, Joshua San Miguel, Tushar Krishna",tags:["noc"]},
+  {y:2019,v:"NOCS",t:"conf",title:"BINDU: Deadlock-Freedom with One Bubble in the Network",a:"Mayank Parasar, Tushar Krishna",tags:["noc"]},
+  {y:2019,v:"FPL",t:"conf",title:"Scaling the Cascades: Interconnect-aware Mapping Strategies for FPGA Implementation of Machine Learning Problems",a:"Ananda Samajdar, Tushar Garg, Tushar Krishna, Nachiket Kapre",tags:["accel","noc"]},
+  {y:2019,v:"DAC",t:"conf",title:"Architecture, Chip, and Package Co-design Flow for 2.5D IC Design Enabling Heterogeneous IP Reuse",a:"Jinwoo Kim, Gauthaman Murali, Heechun Park, Eric Qin, Hyoukjun Kwon, Venkata Chaitanya Krishna Chekuri, Nihar Dasari, Arvind Singh, Minah Lee, Hakki Mert Torun, Kallol Roy, Madhavan Swaminathan, Saibal Mukhopadhyay, Tushar Krishna, Sung Kyu Lim",tags:["emerging"]},
+  {y:2019,v:"ISPASS",t:"conf",title:"mRNA: Enabling Efficient Mapping Space Exploration on a Reconfigurable Neural Accelerator",a:"Zhongyuan Zhao, Hyoukjun Kwon, Sachit Kuhar, Weiguang Sheng, Zhigang Mao, Tushar Krishna",tags:["accel"]},
+  {y:2019,v:"AISTECS",t:"workshop",title:"McMahon: Minimum-cycle Maximum-hop Network",a:"Gokul Subramanian Ravi, Tushar Krishna, Mikko Lipasti",tags:["noc"]},
+  {y:2019,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"Synchronized Progress in Interconnection Networks (SPIN): A New Theory for Deadlock Freedom",a:"Aniruddh Ramrakhyani, Paul Gratz, Tushar Krishna",tags:["noc"]},
+  {y:2018,v:"DATE",t:"conf",title:"Optimizing the Data Placement and Transformation for Multi-bank CGRA Computing System",a:"Zhongyuan Zhao, Yantao Liu, Weiguang Sheng, Tushar Krishna, Qin Wang, Zhigang Mao",tags:["accel"]},
+  {y:2018,v:"NOCS",t:"conf",title:"Architecting a Secure Wireless Network-on-Chip",a:"Brian Lebiednik, Sergi Abadal, Hyoukjun Kwon, Tushar Krishna",tags:["noc","emerging"]},
+  {y:2018,v:"ICRC",t:"conf",title:"Merge Network for a Non-von Neumann Accumulate Accelerator in a 3D Chip",a:"Anirudh Jain, Sriseshan Srikanth, Erik Debenedictis, Tushar Krishna",tags:["accel","emerging"]},
+  {y:2018,v:"MICRO",t:"conf",title:"GeneSys: Enabling Continuous Learning through Neural Network Evolution in Hardware",a:"Ananda Samajdar, Parth Mannan, Kartikay Garg, Tushar Krishna",tags:["accel","edge"]},
+  {y:2018,v:"MICRO",t:"conf",title:"Scalable Distributed Last-Level TLBs Using Low-Latency Interconnects",a:"Srikant Bharadwaj, Guilherme Cox, Tushar Krishna, Abhishek Bhattacharjee",tags:["memory","noc"]},
+  {y:2018,v:"NOCS",t:"conf",title:"Brownian Bubble Router: Enabling Deadlock Freedom via Guaranteed Forward Progress",a:"Mayank Parasar, Ankit Sinha, Tushar Krishna",tags:["noc"]},
+  {y:2018,v:"ISCA",t:"conf",note:"IEEE Micro Top Picks",title:"Synchronized Progress in Interconnection Networks (SPIN): A New Theory for Deadlock Freedom",a:"Aniruddh Ramrakhyani, Paul Gratz, Tushar Krishna",tags:["noc"]},
+  {y:2018,v:"ISCA",t:"conf",title:"FastTrack: Leveraging Heterogeneous FPGA Wires to Design Low-cost High-performance Soft NoCs",a:"Nachiket Kapre, Tushar Krishna",tags:["noc"]},
+  {y:2018,v:"ISCA",t:"conf",title:"SEESAW: Using Superpages to Improve VIPT Caches",a:"Mayank Parasar, Abhishek Bhattacharjee, Tushar Krishna",tags:["memory"]},
+  {y:2018,v:"ISPASS",t:"conf",title:"Performance Implications of NoCs on 3D-Stacked Memories: Insights from the Hybrid Memory Cube",a:"Ramyad Hadidi, Bahar Asgari, Jeffrey Young, Burhan Ahmad Mudassar, Kartikay Garg, Tushar Krishna, Hyesoon Kim",tags:["noc","memory","emerging"]},
+  {y:2018,v:"ASPLOS",t:"conf",note:"Honorable Mention, IEEE Micro Top Picks",title:"MAERI: Enabling Flexible Dataflow Mapping over DNN Accelerators via Reconfigurable Interconnects",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
+  {y:2018,v:"ASPLOS",t:"conf",title:"LATR: Lazy Translation Coherence",a:"Mohan Kumar, Steffen Maass, Sanidhya Kashyap, Jan Vesely, Zi Yan, Taesoo Kim, Abhishek Bhattacharjee, Tushar Krishna",tags:["memory"]},
+  {y:2018,v:"SysML",t:"conf",title:"MAERI: Enabling Flexible Dataflow Mapping over DNN Accelerators via Programmable Interconnects",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
+  {y:2018,v:"AISTECS",t:"workshop",title:"Spoofing Prevention via RF Power Profiling in Wireless Network-on-Chip",a:"Brian Lebiednik, Sergi Abadal, Hyouk Jun Kwon, Tushar Krishna",tags:["noc","emerging"]},
+  {y:2018,v:"IEEE Micro",t:"journal",note:"Special Issue",title:"A Communication-Centric Approach for Designing Flexible DNN Accelerators",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
+  {y:2017,v:"ICCAD",t:"conf",title:"A Case for Low Frequency Single Cycle Multi Hop NoCs for Energy Efficiency and High Performance",a:"Monodeep Kar, Tushar Krishna",tags:["noc"]},
+  {y:2017,v:"NocArc",t:"workshop",title:"Lightweight Emulation of Virtual Channels using Swaps",a:"Mayank Parasar, Tushar Krishna",tags:["noc"]},
+  {y:2017,v:"NOCS",t:"conf",title:"Rethinking NoCs for Spatial Neural Network Accelerators",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["noc","accel"]},
+  {y:2017,v:"NOCS",t:"conf",title:"Adaptive Manycore Architectures for Big Data Computing",a:"Janardhan Rao Doppa, Ryan Gary Kim, Mihailo Isakov, Michel A. Kinsy, Hyoukjun Kwon, Tushar Krishna",tags:["noc"]},
+  {y:2017,v:"ISPASS",t:"conf",title:"OpenSMART: Single-Cycle Multi-hop NoC Generator in BSV and Chisel",a:"Hyoukjun Kwon, Tushar Krishna",tags:["noc","sim"]},
+  {y:2017,v:"DATE",t:"conf",note:"Best Paper Award",title:"Automatic Place-and-Route of Emerging LED-driven Wires within a Monolithically-integrated CMOS+III-V Process",a:"Tushar Krishna, Arya Balachandran, Siau Ben Chiah, Li Zhang, Bing Wang, Cong Wang, Kenneth Lee Eng Kian, Jurgen Michel, Li-Shiuan Peh",tags:["emerging","noc"]},
+  {y:2017,v:"HPCA",t:"conf",title:"Static Bubble: A Framework for Deadlock-free Irregular On-chip Topologies",a:"Aniruddh Ramrakhyani, Tushar Krishna",tags:["noc"]},
+  {y:2017,v:"IEEE JSSC",t:"journal",title:"Eyeriss: An Energy-Efficient Reconfigurable Accelerator for Deep Convolutional Neural Networks",a:"Yu-Hsin Chen, Tushar Krishna, Joel Emer, Vivienne Sze",tags:["accel"]},
+  {y:2017,v:"Synthesis Lectures",t:"book",title:"On-Chip Networks, Second Edition",a:"Natalie Enright Jerger, Tushar Krishna, Li-Shiuan Peh",tags:["noc"]},
+  {y:2016,v:"ISSCC",t:"conf",note:"Media: IEEE Spectrum, The Verge, MIT News",title:"Eyeriss: An Energy-Efficient Reconfigurable Accelerator for Deep Convolutional Neural Networks",a:"Yu-Hsin Chen, Tushar Krishna, Joel Emer, Vivienne Sze",tags:["accel"]},
+  {y:2015,v:"ACM TOCS",t:"journal",title:"Efficient Control and Communication Paradigms for Coarse-Grained Spatial Architectures",a:"M. Pellauer, A. Parashar, M. Adler, B. Ahsan, R. Allmon, N. Crago, K. Fleming, M. Gambhir, A. Jaleel, T. Krishna, D. Lustig, S. Maresh, V. Pavlov, R. Rayess, A. Zhai, J. Emer",tags:["accel"]},
+  {y:2014,v:"NOCS",t:"conf",note:"Best Paper Award",title:"Single-Cycle Collective Communication Over A Shared Network Fabric",a:"Tushar Krishna, Li-Shiuan Peh",tags:["noc"]},
+  {y:2014,v:"Hot Chips",t:"conf",title:"SCORPIO: A 36-Core Research Chip Demonstrating Snoopy Coherence on a Scalable Mesh NoC with In-Network Ordering",a:"Chia-Hsin Owen Chen, Sunghyun Park, Suvinay Subramanian, Tushar Krishna, Bhavya K. Daya, Woo-Cheol Kwon, Brett Wilkerson, John Arends, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
+  {y:2014,v:"ISCA",t:"conf",note:"Media: Wired, PC World, Phys.org",title:"SCORPIO: A 36-Core Research Chip Demonstrating Snoopy Coherence on a Scalable Mesh NoC with In-Network Ordering",a:"Bhavya K. Daya, Chia-Hsin Owen Chen, Suvinay Subramanian, Woo-Cheol Kwon, Sunghyun Park, Tushar Krishna, Jim Holt, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
+  {y:2014,v:"ASPLOS",t:"conf",title:"Locality-Oblivious Cache Organization Leveraging Single-Cycle Multi-Hop NoCs",a:"Woo-Cheol Kwon, Tushar Krishna, Li-Shiuan Peh",tags:["noc","memory"]},
+  {y:2014,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"SMART: Single-Cycle Multihop Traversals Over A Shared Network-on-Chip",a:"Tushar Krishna, Chia-Hsin Owen Chen, Woo-Cheol Kwon, Li-Shiuan Peh",tags:["noc"]},
+  {y:2013,v:"DATE",t:"conf",title:"SMART: A Single-Cycle Reconfigurable NoC for SoC Applications",a:"Chia-Hsin Owen Chen, Sunghyun Park, Tushar Krishna, Suvinay Subramanian, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
+  {y:2013,v:"HPCA",t:"conf",note:"IEEE Micro Top Picks",title:"Breaking the On-Chip Latency Barrier Using SMART",a:"Tushar Krishna, Chia-Hsin Owen Chen, Woo Cheol Kwon, Li-Shiuan Peh",tags:["noc"]},
+  {y:2013,v:"IEEE Computer",t:"journal",title:"Single-Cycle Multihop Asynchronous Repeated Traversal: A SMART Future for Reconfigurable On-Chip Networks",a:"Tushar Krishna, Chia-Hsin Owen Chen, Sunghyun Park, Woo-Cheol Kwon, Suvinay Subramanian, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
+  {y:2012,v:"DAC",t:"conf",note:"Media: EE Times, Slashdot",title:"Approaching the Theoretical Limits of a Mesh NoC with a 16-Node Chip Prototype in 45nm SOI",a:"Sunghyun Park, Tushar Krishna, Chia-Hsin Chen, Bhavya K. Daya, Anantha Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
+  {y:2012,v:"IEEE TVLSI",t:"journal",title:"SWIFT: A Low-Power Network-On-Chip Implementing the Token Flow Control Router Architecture With Swing-Reduced Interconnects",a:"Jacob Postman, Tushar Krishna, Christopher Edmonds, Li-Shiuan Peh, Patrick Chiang",tags:["noc","emerging"]},
+  {y:2011,v:"MICRO",t:"conf",title:"Towards the Ideal On-chip Fabric for 1-to-Many and Many-to-1 Communication",a:"Tushar Krishna, Li-Shiuan Peh, Bradford M. Beckmann, Steven K. Reinhardt",tags:["noc"]},
+  {y:2011,v:"ICCAD",t:"conf",title:"A Low-Swing Crossbar and Link Generator for Low-Power Networks-on-Chip",a:"Chia-Hsin Owen Chen, Sunghyun Park, Tushar Krishna, Li-Shiuan Peh",tags:["noc","emerging"]},
+  {y:2011,v:"ACM SIGARCH CAN",t:"journal",title:"The gem5 Simulator",a:"N. Binkert, B. Beckmann, G. Black, S. K. Reinhardt, A. Saidi, A. Basu, J. Hestness, D. R. Hower, T. Krishna, S. Sardashti, R. Sen, K. Sewell, M. Shoaib, N. Vaish, M. D. Hill, D. A. Wood",tags:["sim"]},
+  {y:2011,v:"US Patent",t:"patent",title:"Message Broadcast with Router Bypassing",a:"Tushar Krishna, Bradford M. Beckmann, Steven K. Reinhardt",tags:["noc"]},
+  {y:2010,v:"ICCD",t:"conf",title:"SWIFT: A SWing-reduced Interconnect For a Token-based Network-on-Chip in 90nm CMOS",a:"Tushar Krishna, Jacob Postman, Christopher Edmonds, Li-Shiuan Peh, Patrick Chiang",tags:["noc","emerging"]},
+  {y:2010,v:"NOCS",t:"conf",title:"Physical vs Virtual Express Topologies with Low-Swing Links for Future Many-core NoCs",a:"Chia-Hsin Owen Chen, Niket Agarwal, Tushar Krishna, Kyung-Hoae Koo, Li-Shiuan Peh, Krishna Saraswat",tags:["noc","emerging"]},
+  {y:2009,v:"ISPASS",t:"conf",title:"GARNET: A Detailed On-Chip Network Model inside a Full-System Simulator",a:"Niket Agarwal, Tushar Krishna, Li-Shiuan Peh, Niraj K. Jha",tags:["noc","sim"]},
+  {y:2009,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"Express Virtual Channels with Capacitively-Driven Global Links",a:"Tushar Krishna, Amit Kumar, Jacob Postman, Patrick Chiang, Mattan Erez, Li-Shiuan Peh",tags:["noc","emerging"]},
+  {y:2008,v:"ICCAD",t:"conf",title:"Texture Filter Memory – A Power-efficient and Scalable Texture Memory Architecture for Mobile Graphics Processors",a:"Silpa BVN, Anjul Patney, Tushar Krishna, Preeti R. Panda, G.S. Visweswaran",tags:["memory","edge"]},
+  {y:2008,v:"HotI",t:"conf",note:"IEEE Micro Top Picks",title:"NoC with Near-Ideal Express Virtual Channels Using Global-Line Communication",a:"Tushar Krishna, Amit Kumar, Patrick Chiang, Mattan Erez, Li-Shiuan Peh",tags:["noc","emerging"]},
+  {y:2006,v:"DAE-BRNS",t:"conf",title:"Modeling Electron Transport Mechanism in a Molecular Diode through ab initio Molecular Energy Calculations",a:"Tushar Krishna, C. Kiran, Dilip K. Maity, Swapan K. Ghosh",tags:["emerging"]}
+];
+
+const TYPE_LABEL = {conf:"Conference",workshop:"Workshop",journal:"Journal",book:"Book",chapter:"Book Chapter",patent:"Patent"};
+const TYPE_CODE = {conf:"c",workshop:"w",journal:"j",book:"b",chapter:"bc",patent:"p"};
+
+let active = new Set();
+let query = "";
+let sortOrder = "new";
+
+const $ = s => document.querySelector(s);
+
+function tagCounts(){
+  const c = {};
+  for(const k in TAGS) c[k]=0;
+  PUBS.forEach(p => p.tags.forEach(t => { if(c[t]!==undefined) c[t]++; }));
+  return c;
+}
+
+function renderDirections(){
+  const c = tagCounts();
+  const box = $("#dirgrid");
+  let html = "";
+  for(const k in TAGS){
+    if(k==="other" && c[k]===0) continue;
+    const on = active.has(k), col = TAGS[k].color;
+    const style = on ? `border-color:${col};background:${col}0f` : '';
+    html += `<button class="dir${on?' on':''}" data-tag="${k}" style="${style}">
+      <div class="dirtop"><span class="dirsw" style="background:${col}"></span><span class="dirname">${TAGS[k].label}</span><span class="dircount">${c[k]}</span></div>
+      <div class="dirdesc">${TAGS[k].desc}</div></button>`;
+  }
+  box.innerHTML = html;
+  box.querySelectorAll(".dir").forEach(el => el.onclick = () => {
+    const t = el.dataset.tag;
+    active.has(t) ? active.delete(t) : active.add(t);
+    renderDirections(); renderList();
+  });
+  $("#clearfilter").classList.toggle("show", active.size>0);
+}
+
+function boldName(a){
+  return a.replace(/Tushar Krishna|T\. Krishna|T\. Krishna,|Tushar Krishna,/g, m => `<b>${m}</b>`);
+}
+
+function pubMatches(p){
+  if(active.size>0 && ![...active].every(t => p.tags.includes(t))) return false;
+  if(query){
+    const hay = (p.title+" "+p.a+" "+p.v+" "+p.y).toLowerCase();
+    if(!hay.includes(query)) return false;
+  }
+  return true;
+}
+
+function renderList(){
+  const list = $("#list");
+  let items = PUBS.filter(pubMatches);
+  items.sort((a,b)=> sortOrder==="new" ? b.y-a.y : a.y-b.y);
+  $("#stat-count").textContent = PUBS.length;
+  $("#foot-count").textContent = items.length===PUBS.length ? `${PUBS.length} entries` : `${items.length} of ${PUBS.length} shown`;
+  $("#rescount").textContent = items.length===PUBS.length ? `${PUBS.length} papers` : `${items.length} found`;
+
+  if(items.length===0){ list.innerHTML=""; $("#empty").style.display="block"; return; }
+  $("#empty").style.display="none";
+
+  let html=""; let curYear=null;
+  for(const p of items){
+    if(p.y!==curYear){ curYear=p.y; html += `<div class="yearhdr">${curYear}</div>`; }
+    const tagPills = p.tags.map(t=>{
+      if(!TAGS[t]) return "";
+      const col=TAGS[t].color;
+      return `<span class="tag" data-tag="${t}" style="color:${col};background:${col}14;border-color:${col}55">${TAGS[t].label}</span>`;
+    }).join("");
+    html += `<div class="pub">
+      <div class="venue"><span class="vbadge">${p.v}</span><span class="typecode">${TYPE_CODE[p.t]||p.t}</span></div>
+      <div>
+        <div class="ptitle">${p.title}</div>
+        <div class="pauth">${boldName(p.a)}</div>
+        ${p.note?`<span class="award">★ ${p.note}</span>`:""}
+        <div class="ptags">${tagPills}</div>
+      </div>
+    </div>`;
+  }
+  list.innerHTML = html;
+  list.querySelectorAll(".tag").forEach(el => el.onclick = () => {
+    const t = el.dataset.tag;
+    active.clear(); active.add(t);
+    renderDirections(); renderList();
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+}
+
+$("#q").addEventListener("input", e => { query=e.target.value.trim().toLowerCase(); renderList(); });
+$("#sort").addEventListener("change", e => { sortOrder=e.target.value; renderList(); });
+
+$("#clearfilter").onclick = () => { active.clear(); renderDirections(); renderList(); };
+renderDirections(); renderList();
+</script>
+</body>
+</html>

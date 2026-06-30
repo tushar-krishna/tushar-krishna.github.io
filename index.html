@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tushar Krishna · Georgia Tech ECE</title>
+<style>
+  :root{
+    --navy:#13284b; --navy2:#1d3a66; --gold:#d4af37; --gold-d:#b08d1e;
+    --bg:#fafbfc; --paper:#ffffff; --ink:#222831; --muted:#5a6472; --line:#e6e8ec;
+    --sans:"Helvetica Neue",Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:var(--navy2);text-decoration:none}
+  a:hover{color:var(--gold-d);text-decoration:underline}
+  /* top bar */
+  .topbar{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
+  .topbar .in{max-width:1140px;margin:0 auto;padding:0 26px;height:54px;display:flex;align-items:center;justify-content:space-between}
+  .topbar .gt{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:600}
+  .topbar .nav{display:flex;gap:24px;font-size:14px}
+  .topbar .nav a{color:rgba(255,255,255,.9)}
+  .topbar .nav a:hover{color:var(--gold);text-decoration:none}
+  @media(max-width:820px){.topbar .nav{display:none}}
+  /* layout */
+  .shell{max-width:1140px;margin:0 auto;padding:34px 26px 0;display:grid;grid-template-columns:312px 1fr;gap:36px;align-items:start}
+  @media(max-width:880px){.shell{grid-template-columns:1fr}}
+  /* sidebar */
+  aside{position:static}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(19,40,75,.06)}
+  .photo{aspect-ratio:1/1.04;background:
+      linear-gradient(160deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9);position:relative}
+  .photo{overflow:hidden}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .photo .mono{font-family:var(--serif);font-size:84px;font-weight:600}
+  .photo .note{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:10.5px;color:rgba(255,255,255,.65);letter-spacing:.04em}
+  .pinfo{padding:18px 20px}
+  .pinfo h1{font-family:var(--serif);font-size:26px;color:var(--navy);line-height:1.1;margin-bottom:4px}
+  .pinfo .ttl{font-size:13.5px;color:var(--muted);font-weight:600}
+  .pinfo .dept{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .pinfo .quote{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--navy);margin-top:13px;padding-top:12px;border-top:1px solid var(--line);line-height:1.5}
+  .pinfo .quote span{display:block;font-style:normal;font-size:11.5px;color:var(--gold-d);margin-top:3px;font-weight:700;letter-spacing:.02em}
+  .side-block{border-top:1px solid var(--line);padding:15px 20px}
+  .side-block .h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:8px}
+  .side-block .row{font-size:13px;color:var(--ink);margin-bottom:6px}
+  .side-block .row b{color:var(--muted);font-weight:600;display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  .side-links{display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600}
+  .cvbtn{display:block;text-align:center;background:var(--gold);color:var(--navy);font-weight:700;padding:11px;font-size:14px;letter-spacing:.03em}
+  .cvbtn:hover{background:var(--gold-d);color:#fff;text-decoration:none}
+  /* main */
+  main{min-width:0}
+  .block{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:26px 30px;margin-bottom:22px;box-shadow:0 1px 3px rgba(19,40,75,.05)}
+  .block h2{font-family:var(--serif);font-size:23px;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:12px}
+  .block h2::before{content:"";width:5px;height:22px;background:var(--gold);border-radius:2px;flex:none}
+  .sub{font-size:13px;color:var(--muted);margin:0 0 16px 17px}
+  .block p{color:var(--ink);margin-bottom:13px}
+  .block p.lead{font-size:16.5px}
+  /* education inline */
+  .edu{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+  @media(max-width:560px){.edu{grid-template-columns:1fr}}
+  .edu .e{border:1px solid var(--line);border-radius:6px;padding:14px;border-top:3px solid var(--navy)}
+  .edu .e .y{font-size:12px;color:var(--gold-d);font-weight:700}
+  .edu .e h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin:3px 0}
+  .edu .e p{font-size:12.5px;color:var(--muted);margin:0}
+  /* interests */
+  .int{display:flex;flex-wrap:wrap;gap:9px}
+  .int span{background:#eef0f4;border:1px solid var(--line);color:var(--navy);border-radius:4px;padding:7px 13px;font-size:13.5px;font-weight:600}
+  .jumplink{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:700;color:var(--navy)}
+  .jumplink:hover{color:var(--gold-d)}
+  /* tools list */
+  .tlist{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px}
+  @media(max-width:560px){.tlist{grid-template-columns:1fr}}
+  .tlist .t{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .tlist .t a{font-weight:700}
+  .tlist .t span{color:var(--muted);font-size:12.5px;display:block}
+  .tgroup{margin-top:18px}
+  .tgroup:first-of-type{margin-top:6px}
+  .tgroup .lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:6px}
+  /* scrollable boxes */
+  .scrollbox{border:1px solid var(--line);border-radius:6px;overflow-y:auto;background:#fcfcfd}
+  .scrollbox::-webkit-scrollbar{width:9px}
+  .scrollbox::-webkit-scrollbar-thumb{background:#cdd2db;border-radius:6px}
+  .scrollbox::-webkit-scrollbar-track{background:transparent}
+  .scrollhint{font-size:11.5px;color:var(--muted);margin-top:8px;font-style:italic}
+  /* teaching */
+  .teach-scroll{max-height:168px}
+  .teach-row{padding:11px 15px;border-bottom:1px solid var(--line);font-size:14px}
+  .teach-row:last-child{border-bottom:0}
+  .teach-row a{font-weight:600}
+  .teach-row span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+  /* service */
+  .svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:560px){.svc-cols{grid-template-columns:1fr}}
+  .svc-col .lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:8px}
+  .svc-scroll{max-height:150px}
+  .svc-item{padding:9px 13px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.4}
+  .svc-item:last-child{border-bottom:0}
+  .svc-item b{color:var(--navy)}
+  footer{background:var(--navy);color:rgba(255,255,255,.8);margin-top:14px}
+  footer .in{max-width:1140px;margin:0 auto;padding:22px 26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <div class="gt">Tushar Krishna</div>
+  <div class="nav">
+    <a href="#bio">Biography</a><a href="#research">Research</a><a href="publications.html">Publications</a><a href="#tools">Tools</a>
+    <a href="#teaching">Teaching</a><a href="#service">Service</a>
+  </div>
+</div></div>
+
+<div class="shell">
+  <aside>
+    <div class="card">
+      <div class="photo"><img src="headshot-web.jpg" alt="Tushar Krishna"></div>
+      <div class="pinfo">
+        <h1>Tushar Krishna</h1>
+        <div class="ttl">Associate Professor</div>
+        <div class="dept">School of Electrical &amp; Computer Engineering<br>School of Computer Science (Adjunct)<br>Georgia Institute of Technology</div>
+        <div class="quote">“Cogito, ergo sum”<span>— René Descartes</span></div>
+      </div>
+      <div class="side-block">
+        <div class="h">Contact</div>
+        <div class="row"><b>Email</b>tushar [at] ece.gatech.edu</div>
+        <div class="row"><b>Office</b>Klaus Advanced Computing Center, Rm 2318</div>
+        <div class="row"><b>Mail</b>266 Ferst Drive, Atlanta, GA 30332</div>
+      </div>
+      <div class="side-block">
+        <div class="h">Profiles</div>
+        <div class="side-links">
+          <a href="http://synergy.ece.gatech.edu/" target="_blank">Synergy Research Group</a>
+          <a href="publications.html">Publications (full list)</a>
+          <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ" target="_blank">Google Scholar</a>
+          <a href="http://dblp.uni-trier.de/pers/hd/k/Krishna:Tushar" target="_blank">DBLP</a>
+          <a href="https://www.linkedin.com/in/tushar-krishna-a60b0970/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <a class="cvbtn" href="https://sites.gatech.edu/ece-tusharkishna/files/2025/12/TusharKrishna_CV.pdf" target="_blank">Download CV (PDF)</a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="block" id="bio">
+      <h2>Biography</h2>
+      <p class="lead">Tushar Krishna is an Associate Professor in the School of Electrical &amp; Computer Engineering at Georgia Tech, with a courtesy appointment in Computer Science. His research spans computer architecture, interconnection networks, networks-on-chip, and AI/ML accelerator systems — with a focus on optimizing data movement in modern computing platforms.</p>
+      <p>He held the ON Semiconductor (Endowed) Junior Professorship in ECE from 2019–2021, and has been a visiting professor at MIT EECS + CSAIL and Harvard CS, and a researcher in Intel's VSSAD group. He earned his Ph.D. in EECS from MIT (2014), an M.S.E. from Princeton (2009), and a B.Tech. from IIT Delhi (2007). His papers have been cited over 23,300 times, and he is a member of the Halls of Fame of all three premier computer architecture conferences — MICRO, HPCA, and ISCA. He was a recipient of the “Under 40 Innovators Award” at DAC in 2025.</p>
+      <p>His research is funded by NSF, DARPA, IARPA, SRC (JUMP 2.0), the Department of Energy, Intel, Google, Meta, Qualcomm and TSMC. He serves as Co-Director of the Center for Research into Novel Computing Hierarchies (CRNCH) and co-chairs the Chakra Execution Traces &amp; Benchmarks working group within MLCommons.</p>
+      <div class="edu">
+        <div class="e"><div class="y">Ph.D. · 2014</div><h3>MIT</h3><p>Electrical Engineering &amp; Computer Science</p></div>
+        <div class="e"><div class="y">M.S.E. · 2009</div><h3>Princeton</h3><p>Electrical Engineering</p></div>
+        <div class="e"><div class="y">B.Tech. · 2007</div><h3>IIT Delhi</h3><p>Electrical Engineering (Honors)</p></div>
+      </div>
+    </div>
+
+    <div class="block" id="research">
+      <h2>Research Interests</h2>
+      <p class="sub">The directions used to organize and tag the full publication list.</p>
+      <div class="int">
+        <span>AI/ML Accelerators</span>
+        <span>Compositional &amp; Cognitive AI</span>
+        <span>Distributed AI Systems</span>
+        <span>Efficient LLM &amp; Model Inference</span>
+        <span>AI-Assisted Design</span>
+        <span>Interconnection &amp; On-Chip Networks</span>
+        <span>Simulation &amp; Benchmarking</span>
+        <span>Emerging Tech &amp; Packaging</span>
+        <span>Memory &amp; Virtual-Memory Systems</span>
+        <span>Edge &amp; Embodied Computing</span>
+      </div>
+      <a class="jumplink" href="publications.html">Browse publications by these topics →</a>
+    </div>
+
+    <div class="block" id="tools">
+      <h2>Released Tools</h2>
+      <p class="sub">Open-source simulators and frameworks from the Synergy Lab.</p>
+
+      <div class="tgroup">
+        <div class="lbl">Distributed AI Systems</div>
+        <div class="tlist">
+          <div class="t"><a href="https://astra-sim.github.io/" target="_blank">ASTRA-sim</a><span>Distributed AI/ML systems simulator</span></div>
+          <div class="t"><a href="https://github.com/mlcommons/chakra" target="_blank">Chakra</a><span>AI/ML execution traces (MLCommons)</span></div>
+        </div>
+      </div>
+
+      <div class="tgroup">
+        <div class="lbl">AI Accelerators</div>
+        <div class="tlist">
+          <div class="t"><a href="https://github.com/ARM-software/SCALE-Sim" target="_blank">SCALE-sim</a><span>Systolic-array simulator</span></div>
+          <div class="t"><a href="http://maestro.ece.gatech.edu" target="_blank">MAESTRO</a><span>AI accelerator dataflow cost model</span></div>
+          <div class="t"><a href="https://github.com/stonne-simulator/stonne" target="_blank">STONNE</a><span>Cycle-accurate flexible AI accelerator simulator</span></div>
+          <div class="t"><a href="https://github.com/maeri-project/FEATHER" target="_blank">FEATHER</a><span>Reconfigurable AI accelerator RTL + compiler</span></div>
+        </div>
+      </div>
+
+      <div class="tgroup">
+        <div class="lbl">Networks-on-Chip</div>
+        <div class="tlist">
+          <div class="t"><a href="https://www.gem5.org/documentation/general_docs/ruby/garnet-2/" target="_blank">Garnet 2.0</a><span>Network-on-chip model in gem5</span></div>
+          <div class="t"><a href="http://sites.gatech.edu/ece-synergy/tools/opensmart/" target="_blank">OpenSMART</a><span>Single-cycle multi-hop NoC generator</span></div>
+        </div>
+      </div>
+    </div>
+
+<div class="block" id="teaching">
+      <h2>Teaching</h2>
+      <p class="sub">Courses taught at Georgia Tech — scroll within the box for the full history.</p>
+      <div class="scrollbox teach-scroll">
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/hml_s25" target="_blank">Hardware-Software Co-Design for ML Systems</a><span>Spring 2025</span></div>
+        <div class="teach-row"><a href="https://www.divyamahajan.com/teaching/ececs-8803-hml-2024" target="_blank">Hardware-Software Co-Design for ML Systems</a><span>Spring 2024</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f22/" target="_blank">Architecture, Systems, Concurrency &amp; Energy in Computation</a><span>Fall 2022</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s22/" target="_blank">Interconnection Networks for High-Performance Systems</a><span>Spring 2022</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f21/" target="_blank">Architecture, Systems, Concurrency &amp; Energy in Computation</a><span>Fall 2021</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s21/" target="_blank">Interconnection Networks for High-Performance Systems</a><span>Spring 2021</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_s21/" target="_blank">Architecture, Systems, Concurrency &amp; Energy in Computation</a><span>Spring 2021</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s20/" target="_blank">Interconnection Networks for High-Performance Systems</a><span>Spring 2020</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_s20/" target="_blank">Architecture, Systems, Concurrency &amp; Energy in Computation</a><span>Spring 2020</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/aca_f19/" target="_blank">Advanced Computer Architecture</a><span>Fall 2019</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/hml_s19/" target="_blank">Hardware Acceleration for Machine Learning</a><span>Spring 2019</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s19/" target="_blank">Interconnection Networks for High-Performance Systems</a><span>Spring 2019</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_f18/" target="_blank">Architecture, Concurrency &amp; Energy in Computation</a><span>Fall 2018</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/uca_s18/" target="_blank">Architecture, Concurrency &amp; Energy in Computation</a><span>Spring 2018</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s18/" target="_blank">Interconnection Networks for High-Performance Systems</a><span>Spring 2018</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/nocs_acaces17/" target="_blank">Networks-on-Chip — ACACES Summer School</a><span>Summer 2017</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s17/" target="_blank">Interconnection Networks</a><span>Spring 2017</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/aca_f16/" target="_blank">Advanced Computer Architecture</a><span>Fall 2016</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/icn_s16/" target="_blank">Interconnection Networks</a><span>Spring 2016</span></div>
+        <div class="teach-row"><a href="https://tusharkrishna.ece.gatech.edu/teaching/aca_f15/" target="_blank">Advanced Computer Architecture</a><span>Fall 2015</span></div>
+      </div>
+    </div>
+
+    <div class="block" id="service">
+      <h2>Professional Service</h2>
+      <div class="svc-cols">
+        <div class="svc-col">
+          <div class="lbl">Conference Organization</div>
+          <div class="scrollbox svc-scroll">
+            <div class="svc-item"><b>Program Co-Chair</b> — MICRO 2026</div>
+            <div class="svc-item"><b>Program Vice-Chair</b> — ISCA 2023</div>
+            <div class="svc-item"><b>Artifacts Evaluation Co-Chair</b> — HPCA 2022</div>
+            <div class="svc-item"><b>General Chair</b> — NOCS 2021</div>
+            <div class="svc-item"><b>Tutorials &amp; Workshops Chair</b> — ISPASS 2021</div>
+            <div class="svc-item"><b>Program Co-Chair</b> — NOCS 2020</div>
+            <div class="svc-item"><b>Co-Chair</b> — RISC-A 2019</div>
+            <div class="svc-item"><b>Special Sessions Co-Chair</b> — NOCS 2019</div>
+            <div class="svc-item"><b>Co-Chair</b> — RISC-A 2018 (Inaugural)</div>
+            <div class="svc-item"><b>Publicity Co-Chair</b> — NOCS 2018</div>
+            <div class="svc-item"><b>Student Travel Grants Co-Chair</b> — PACT 2018</div>
+            <div class="svc-item"><b>Student Travel Grants Co-Chair</b> — ISCA 2017</div>
+            <div class="svc-item"><b>Tutorials &amp; Workshops Chair</b> — ASPLOS 2016</div>
+          </div>
+        </div>
+        <div class="svc-col">
+          <div class="lbl">Technical Program Committee</div>
+          <div class="scrollbox svc-scroll">
+            <div class="svc-item">IEEE Micro Top Picks 2026</div>
+            <div class="svc-item">HPCA 2026</div>
+            <div class="svc-item">MICRO 2025</div>
+            <div class="svc-item">ASPLOS 2025</div>
+            <div class="svc-item">IEEE Micro Top Picks 2025</div>
+            <div class="svc-item">ISCA 2025</div>
+            <div class="svc-item">MLSys 2025</div>
+            <div class="svc-item">Rising Stars in MLSystems 2025</div>
+            <div class="svc-item">MICRO 2024</div>
+            <div class="svc-item">ISCA 2024</div>
+            <div class="svc-item">MLSys 2024</div>
+            <div class="svc-item">MICRO 2023</div>
+            <div class="svc-item">IEEE Micro Top Picks 2023</div>
+            <div class="svc-item">MLSys 2023</div>
+            <div class="svc-item">ASPLOS 2023</div>
+            <div class="svc-item">DATE 2023 <b>·</b> topic co-chair</div>
+            <div class="svc-item">MICRO 2022</div>
+            <div class="svc-item">SC 2022</div>
+            <div class="svc-item">MLSys 2022</div>
+            <div class="svc-item">IEEE Micro Top Picks 2022</div>
+            <div class="svc-item">HPCA 2022</div>
+            <div class="svc-item">DATE 2022 <b>·</b> topic co-chair</div>
+            <div class="svc-item">MICRO 2021</div>
+            <div class="svc-item">ISCA 2021</div>
+            <div class="svc-item">ISCAS 2021</div>
+            <div class="svc-item">DATE 2021 <b>·</b> topic co-chair</div>
+            <div class="svc-item">HPCA 2021</div>
+            <div class="svc-item">MICRO 2020</div>
+            <div class="svc-item">ISCA 2020</div>
+            <div class="svc-item">IEEE Micro Top Picks 2020</div>
+            <div class="svc-item">DATE 2020</div>
+            <div class="svc-item">Hot Interconnects 2019</div>
+            <div class="svc-item">MICRO 2019</div>
+            <div class="svc-item">PACT 2019</div>
+            <div class="svc-item">ISCA 2019</div>
+            <div class="svc-item">DAC 2019 <b>·</b> track chair</div>
+            <div class="svc-item">DATE 2019</div>
+            <div class="svc-item">AISTECS 2019</div>
+            <div class="svc-item">MICRO 2018</div>
+            <div class="svc-item">DAC 2018</div>
+            <div class="svc-item">IPDPS 2018</div>
+            <div class="svc-item">ISPASS 2018</div>
+            <div class="svc-item">DATE 2018</div>
+            <div class="svc-item">DAC 2017</div>
+            <div class="svc-item">DATE 2017</div>
+            <div class="svc-item">MICRO 2016</div>
+            <div class="svc-item">Hot Interconnects 2016</div>
+            <div class="svc-item">DAC 2016</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer><div class="in">
+  <span>© 2026 Tushar Krishna · School of ECE, Georgia Institute of Technology</span>
+  <span><a href="publications.html" style="color:var(--gold)">Publications</a></span>
+</div></footer>
+</body>
+</html>
