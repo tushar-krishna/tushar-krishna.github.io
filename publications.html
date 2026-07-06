@@ -162,6 +162,7 @@ const TAGS = {
 };
 
 const PUBS = [
+  {y:2026,v:"DAC",m:7.5,t:"conf",title:"Enabling AI ASICs for Zero Knowledge Proof",a:"Jianming Tong, Jingtian Dang, Simon Langowski, Tianhao Huang, Asra Ali, Jeremy Kun, Jevin Jiang, Srinivas Devadas, Tushar Krishna",tags:["accel"]},
   {y:2026,v:"ICS",t:"conf",title:"Closing the Efficiency Gap: AI Datacenter Co-design Roadmap for Scalable Training of LLMs",a:"Jesmin Jahan Tithi, Hanjiang Wu, Joongun Park, Avishaii Abuhatzera, Fabrizio Petrini, Tushar Krishna",tags:["dist","llm","sim"]},
   {y:2026,v:"ICML",t:"conf",note:"Spotlight",title:"ThunderAgent: A Fast, Simple, and Program-Aware Agentic Inference System",a:"Hao Kang, Ziyang Li, Xinyu Yang, Weili Xu, Yinfang Chen, Junxiong Wang, Beidi Chen, Tushar Krishna, Chenfeng Xu, Simran Arora",tags:["compai","llm"]},
   {y:2026,v:"ICML",t:"conf",title:"QuArch: A Benchmark for Evaluating LLM Reasoning in Computer Architecture",a:"Shvetank Prakash, Andrew Cheng, Arya Tschand, Mark Mazumder, Varun Gohil, Jeffrey Ma, Jason Yik, Zishen Wan, Jessica A. Quaye, Elisavet Alvanaki, Avinash Kumar, Chandrashis Mazumdar, Tuhin Khare, Alexander Ingare, Ikechukwu Uchendu, Radhika Ghosal, Abhishek Tyagi, Chenyu Wang, Andrea Mattia Garavagno, Sarah Gu, Alice Guo, Grace Hur, Luca Carloni, Tushar Krishna, Ankita Nayak, Amir Yazdanbakhsh, Vijay Janapa Reddi",tags:["sim","llm"]},
@@ -353,6 +354,22 @@ const PUBS = [
 
 const TYPE_LABEL = {conf:"Conference",workshop:"Workshop",journal:"Journal",book:"Book",chapter:"Book Chapter",patent:"Patent"};
 const TYPE_CODE = {conf:"c",workshop:"w",journal:"j",book:"b",chapter:"bc",patent:"p"};
+// Month each venue is held/published (1=Jan…12=Dec), used to order & group papers within a year.
+const VENUE_MONTH = {
+  "ASP-DAC":1,"AISTECS":1,"IEEE JSSC":1,
+  "AAAI":2,"HPCA":2,"ISSCC":2,"SysML":2,
+  "ASPLOS":3,"DATE":3,"CPAL":3,
+  "ISQED":4,"ICLR":4,"IEEE TVLSI":4,"IEEE TPDS":4,
+  "ISPASS":5,"MLSys":5,"IPDPS":5,"ISCAS":5,"RadarConf":5,"ACM SIGARCH CAN":5,
+  "ISCA":6,"DAC":6,"SIGMETRICS":6,"IMS":6,"IEEE CAL":6,"IEEE TC":6,"ACM TACO":6,"ACM JETC":6,"IEEE Micro":6,"Springer (chapter)":6,"Synthesis Lectures":6,"DAE-BRNS":6,
+  "ICML":7,"ICS":7,
+  "HotI":8,"Hot Chips":8,"ISLPED":8,
+  "NOCS":9,"PACT":9,"FPL":9,"ECCV":9,"NANOCOM":9,"NeuS":9,"IEEE TCASAI":9,"IEEE T-Radar":9,"ACM TOCS":9,
+  "MICRO":10,"ICCV":10,"VLSI-SoC":10,"HASP@MICRO":10,"NocArc":10,"ICCD":10,"IEEE Computer":10,"IEEE SENSORS":10,
+  "ICCAD":11,"SC":11,"IISWC":11,"Middleware":11,"ICRC":11,"ICECS":11,"IA³ @ SC":11,
+  "NeurIPS":12,"ENLSP@NeurIPS":12,"IRDS (chapter)":12,"US Patent":12
+};
+const venueMonth = p => (p.m ?? VENUE_MONTH[p.v] ?? 6);
 
 let active = new Set();
 let query = "";
@@ -404,7 +421,13 @@ function pubMatches(p){
 function renderList(){
   const list = $("#list");
   let items = PUBS.filter(pubMatches);
-  items.sort((a,b)=> sortOrder==="new" ? b.y-a.y : a.y-b.y);
+  items.sort((a,b)=>{
+    if(a.y!==b.y) return sortOrder==="new" ? b.y-a.y : a.y-b.y;
+    const ma=venueMonth(a), mb=venueMonth(b);
+    if(ma!==mb) return sortOrder==="new" ? mb-ma : ma-mb;
+    if(a.v!==b.v) return a.v.localeCompare(b.v);   // keep same-conference papers together
+    return 0;
+  });
   $("#stat-count").textContent = PUBS.length;
   $("#foot-count").textContent = items.length===PUBS.length ? `${PUBS.length} entries` : `${items.length} of ${PUBS.length} shown`;
   $("#rescount").textContent = items.length===PUBS.length ? `${PUBS.length} papers` : `${items.length} found`;
