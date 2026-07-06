@@ -119,6 +119,11 @@
   <div class="asof">Citation metrics from Google Scholar · last updated July 2026 · refreshed monthly</div>
 </div></header>
 
+<div class="directions"><div class="wrap">
+  <div class="dirhead"><h2>Research directions <span class="dirhint">— click any topic to filter. Selecting multiple topics finds papers spanning all of them.</span></h2><span class="clearbtn" id="clearfilter">Clear filter ✕</span></div>
+  <div class="dirgrid" id="dirgrid"></div>
+</div></div>
+
 <div class="controls"><div class="wrap">
   <div class="searchrow">
     <input id="q" type="text" placeholder="Search title, author, or venue…" autocomplete="off">
@@ -129,11 +134,6 @@
     <span class="rescount" id="rescount"></span>
   </div>
   <div class="typelegend"><b>Type</b> <span class="typecode">c</span> Conference <span class="typecode">j</span> Journal <span class="typecode">w</span> Workshop <span class="typecode">b</span> Book <span class="typecode">bc</span> Chapter <span class="typecode">p</span> Patent <span style="color:#c9ccd2">|</span> <b style="color:var(--ink)">*</b> equal contribution</div>
-</div></div>
-
-<div class="directions"><div class="wrap">
-  <div class="dirhead"><h2>Research directions <span class="dirhint">— click any topic to filter. Selecting multiple topics finds papers spanning all of them.</span></h2><span class="clearbtn" id="clearfilter">Clear filter ✕</span></div>
-  <div class="dirgrid" id="dirgrid"></div>
 </div></div>
 
 <main><div class="wrap">
@@ -290,7 +290,7 @@ const PUBS = [
   {y:2020,v:"HPCA",t:"conf",title:"ALRESCHA: A Lightweight Reconfigurable Sparse-Computation Accelerator",a:"Bahar Asgari, Ramyad Hadidi, Tushar Krishna, Hyesoon Kim, Sudhakar Yalamanchili",tags:["accel"]},
   {y:2020,v:"IEEE TVLSI",t:"journal",title:"Architecture, Chip, and Package Co-design Flow for 2.5D IC Design Enabling Heterogeneous IP Reuse",a:"Jinwoo Kim, Gauthaman Murali, Heechun Park, Eric Qin, Hyoukjun Kwon, Venkata Chaitanya Krishna Chekuri, Nael Mizanur Rahman, Nihar Dasari, Arvind Singh, Minah Lee, Hakki Mert Torun, Kallol Roy, Madhavan Swaminathan, Saibal Mukhopadhyay, Tushar Krishna, Sung Kyu Lim",tags:["emerging"]},
   {y:2020,v:"ACM TACO",t:"journal",title:"EcoTLB: Eventually Consistent TLBs",a:"Steffen Maass, Mohan Kumar, Taesoo Kim, Tushar Krishna, Abhishek Bhattacharjee",tags:["memory"]},
-  {y:2020,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"MAESTRO: A Data-Centric Approach to Understand Reuse, Performance, and Hardware Cost of DNN Mappings",a:"Hyoukjun Kwon, Prasanth Chatarasi, Michael Pellauer, Angshuman Parashar, Vivek Sarkar, Tushar Krishna",tags:["accel","sim"]},
+  {y:2020,v:"IEEE Micro",t:"journal",note:"Top Picks",si:"Special Issue: Top Picks from the Computer Architecture Conferences",title:"MAESTRO: A Data-Centric Approach to Understand Reuse, Performance, and Hardware Cost of DNN Mappings",a:"Hyoukjun Kwon, Prasanth Chatarasi, Michael Pellauer, Angshuman Parashar, Vivek Sarkar, Tushar Krishna",tags:["accel","sim"]},
   {y:2020,v:"Synthesis Lectures",t:"book",title:"Data Orchestration in Deep Learning Accelerators",a:"Tushar Krishna, Michael Pellauer, Angshuman Parashar, Hyoukjun Kwon, Ananda Samajdar",tags:["accel"]},
   {y:2020,v:"IRDS (chapter)",t:"chapter",title:"Application Benchmarking",a:"Geoffrey Burr, Tom Conte, Paolo Gargini, Vladimir Getov, Yoshihiro Hayashi, Takeshi Iwashita, Vijay Janapa Reddi, Masaaki Kondo, Tushar Krishna, Peter M. Kogge, Anoop Nair, Dam Sunwoo, Josep Torrellas, Peter Torelli",tags:["sim"]},
   {y:2019,v:"NOCS",t:"conf",title:"Reinforcement Learning Based Interconnection Routing for Adaptive Traffic Optimization",a:"Sheng-Chun Kao, Chao-Han Huck Yang, Pin-Yu Chen, Xiaoli Ma, Tushar Krishna",tags:["noc","mldesign"]},
@@ -303,7 +303,7 @@ const PUBS = [
   {y:2019,v:"DAC",t:"conf",title:"Architecture, Chip, and Package Co-design Flow for 2.5D IC Design Enabling Heterogeneous IP Reuse",a:"Jinwoo Kim, Gauthaman Murali, Heechun Park, Eric Qin, Hyoukjun Kwon, Venkata Chaitanya Krishna Chekuri, Nihar Dasari, Arvind Singh, Minah Lee, Hakki Mert Torun, Kallol Roy, Madhavan Swaminathan, Saibal Mukhopadhyay, Tushar Krishna, Sung Kyu Lim",tags:["emerging"]},
   {y:2019,v:"ISPASS",t:"conf",title:"mRNA: Enabling Efficient Mapping Space Exploration on a Reconfigurable Neural Accelerator",a:"Zhongyuan Zhao, Hyoukjun Kwon, Sachit Kuhar, Weiguang Sheng, Zhigang Mao, Tushar Krishna",tags:["accel"]},
   {y:2019,v:"AISTECS",t:"workshop",title:"McMahon: Minimum-cycle Maximum-hop Network",a:"Gokul Subramanian Ravi, Tushar Krishna, Mikko Lipasti",tags:["noc"]},
-  {y:2019,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"Synchronized Progress in Interconnection Networks (SPIN): A New Theory for Deadlock Freedom",a:"Aniruddh Ramrakhyani, Paul Gratz, Tushar Krishna",tags:["noc"]},
+  {y:2019,v:"IEEE Micro",t:"journal",note:"Top Picks",si:"Special Issue: Top Picks from the Computer Architecture Conferences",title:"Synchronized Progress in Interconnection Networks (SPIN): A New Theory for Deadlock Freedom",a:"Aniruddh Ramrakhyani, Paul Gratz, Tushar Krishna",tags:["noc"]},
   {y:2018,v:"DATE",t:"conf",title:"Optimizing the Data Placement and Transformation for Multi-bank CGRA Computing System",a:"Zhongyuan Zhao, Yantao Liu, Weiguang Sheng, Tushar Krishna, Qin Wang, Zhigang Mao",tags:["accel"]},
   {y:2018,v:"NOCS",t:"conf",title:"Architecting a Secure Wireless Network-on-Chip",a:"Brian Lebiednik, Sergi Abadal, Hyoukjun Kwon, Tushar Krishna",tags:["noc","emerging","security"]},
   {y:2018,v:"ICRC",t:"conf",title:"Merge Network for a Non-von Neumann Accumulate Accelerator in a 3D Chip",a:"Anirudh Jain, Sriseshan Srikanth, Erik Debenedictis, Tushar Krishna",tags:["accel","emerging"]},
@@ -318,7 +318,7 @@ const PUBS = [
   {y:2018,v:"ASPLOS",t:"conf",title:"LATR: Lazy Translation Coherence",a:"Mohan Kumar, Steffen Maass, Sanidhya Kashyap, Jan Vesely, Zi Yan, Taesoo Kim, Abhishek Bhattacharjee, Tushar Krishna",tags:["memory"]},
   {y:2018,v:"SysML",t:"conf",title:"MAERI: Enabling Flexible Dataflow Mapping over DNN Accelerators via Programmable Interconnects",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
   {y:2018,v:"AISTECS",t:"workshop",title:"Spoofing Prevention via RF Power Profiling in Wireless Network-on-Chip",a:"Brian Lebiednik, Sergi Abadal, Hyouk Jun Kwon, Tushar Krishna",tags:["noc","emerging","security"]},
-  {y:2018,v:"IEEE Micro",t:"journal",note:"Special Issue",title:"A Communication-Centric Approach for Designing Flexible DNN Accelerators",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
+  {y:2018,v:"IEEE Micro",t:"journal",si:"Special Issue on Hardware Acceleration",title:"A Communication-Centric Approach for Designing Flexible DNN Accelerators",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["accel","noc"]},
   {y:2017,v:"ICCAD",t:"conf",title:"A Case for Low Frequency Single Cycle Multi Hop NoCs for Energy Efficiency and High Performance",a:"Monodeep Kar, Tushar Krishna",tags:["noc"]},
   {y:2017,v:"NocArc",t:"workshop",title:"Lightweight Emulation of Virtual Channels using Swaps",a:"Mayank Parasar, Tushar Krishna",tags:["noc"]},
   {y:2017,v:"NOCS",t:"conf",title:"Rethinking NoCs for Spatial Neural Network Accelerators",a:"Hyoukjun Kwon, Ananda Samajdar, Tushar Krishna",tags:["noc","accel"]},
@@ -334,7 +334,7 @@ const PUBS = [
   {y:2014,v:"Hot Chips",t:"conf",title:"SCORPIO: A 36-Core Research Chip Demonstrating Snoopy Coherence on a Scalable Mesh NoC with In-Network Ordering",a:"Chia-Hsin Owen Chen, Sunghyun Park, Suvinay Subramanian, Tushar Krishna, Bhavya K. Daya, Woo-Cheol Kwon, Brett Wilkerson, John Arends, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
   {y:2014,v:"ISCA",t:"conf",note:"Media: Wired, PC World, Phys.org",title:"SCORPIO: A 36-Core Research Chip Demonstrating Snoopy Coherence on a Scalable Mesh NoC with In-Network Ordering",a:"Bhavya K. Daya, Chia-Hsin Owen Chen, Suvinay Subramanian, Woo-Cheol Kwon, Sunghyun Park, Tushar Krishna, Jim Holt, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
   {y:2014,v:"ASPLOS",t:"conf",title:"Locality-Oblivious Cache Organization Leveraging Single-Cycle Multi-Hop NoCs",a:"Woo-Cheol Kwon, Tushar Krishna, Li-Shiuan Peh",tags:["noc","memory"]},
-  {y:2014,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"SMART: Single-Cycle Multihop Traversals Over A Shared Network-on-Chip",a:"Tushar Krishna, Chia-Hsin Owen Chen, Woo-Cheol Kwon, Li-Shiuan Peh",tags:["noc"]},
+  {y:2014,v:"IEEE Micro",t:"journal",note:"Top Picks",si:"Special Issue: Top Picks from the Computer Architecture Conferences",title:"SMART: Single-Cycle Multihop Traversals Over A Shared Network-on-Chip",a:"Tushar Krishna, Chia-Hsin Owen Chen, Woo-Cheol Kwon, Li-Shiuan Peh",tags:["noc"]},
   {y:2013,v:"DATE",t:"conf",title:"SMART: A Single-Cycle Reconfigurable NoC for SoC Applications",a:"Chia-Hsin Owen Chen, Sunghyun Park, Tushar Krishna, Suvinay Subramanian, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
   {y:2013,v:"HPCA",t:"conf",note:"IEEE Micro Top Picks",title:"Breaking the On-Chip Latency Barrier Using SMART",a:"Tushar Krishna, Chia-Hsin Owen Chen, Woo Cheol Kwon, Li-Shiuan Peh",tags:["noc"]},
   {y:2013,v:"IEEE Computer",t:"journal",title:"Single-Cycle Multihop Asynchronous Repeated Traversal: A SMART Future for Reconfigurable On-Chip Networks",a:"Tushar Krishna, Chia-Hsin Owen Chen, Sunghyun Park, Woo-Cheol Kwon, Suvinay Subramanian, Anantha P. Chandrakasan, Li-Shiuan Peh",tags:["noc"]},
@@ -347,7 +347,7 @@ const PUBS = [
   {y:2010,v:"ICCD",t:"conf",title:"SWIFT: A SWing-reduced Interconnect For a Token-based Network-on-Chip in 90nm CMOS",a:"Tushar Krishna, Jacob Postman, Christopher Edmonds, Li-Shiuan Peh, Patrick Chiang",tags:["noc","emerging"]},
   {y:2010,v:"NOCS",t:"conf",title:"Physical vs Virtual Express Topologies with Low-Swing Links for Future Many-core NoCs",a:"Chia-Hsin Owen Chen, Niket Agarwal, Tushar Krishna, Kyung-Hoae Koo, Li-Shiuan Peh, Krishna Saraswat",tags:["noc","emerging"]},
   {y:2009,v:"ISPASS",t:"conf",title:"GARNET: A Detailed On-Chip Network Model inside a Full-System Simulator",a:"Niket Agarwal, Tushar Krishna, Li-Shiuan Peh, Niraj K. Jha",tags:["noc","sim"]},
-  {y:2009,v:"IEEE Micro",t:"journal",note:"Top Picks",title:"Express Virtual Channels with Capacitively-Driven Global Links",a:"Tushar Krishna, Amit Kumar, Jacob Postman, Patrick Chiang, Mattan Erez, Li-Shiuan Peh",tags:["noc","emerging"]},
+  {y:2009,v:"IEEE Micro",t:"journal",note:"Top Picks",si:"Special Issue: Top Picks from Hot Interconnects",title:"Express Virtual Channels with Capacitively-Driven Global Links",a:"Tushar Krishna, Amit Kumar, Jacob Postman, Patrick Chiang, Mattan Erez, Li-Shiuan Peh",tags:["noc","emerging"]},
   {y:2008,v:"ICCAD",t:"conf",title:"Texture Filter Memory – A Power-efficient and Scalable Texture Memory Architecture for Mobile Graphics Processors",a:"Silpa BVN, Anjul Patney, Tushar Krishna, Preeti R. Panda, G.S. Visweswaran",tags:["memory","edge"]},
   {y:2008,v:"HotI",t:"conf",note:"IEEE Micro Top Picks",title:"NoC with Near-Ideal Express Virtual Channels Using Global-Line Communication",a:"Tushar Krishna, Amit Kumar, Patrick Chiang, Mattan Erez, Li-Shiuan Peh",tags:["noc","emerging"]},
   {y:2006,v:"DAE-BRNS",t:"conf",title:"Modeling Electron Transport Mechanism in a Molecular Diode through ab initio Molecular Energy Calculations",a:"Tushar Krishna, C. Kiran, Dilip K. Maity, Swapan K. Ghosh",tags:["emerging"]}
@@ -371,6 +371,84 @@ const VENUE_MONTH = {
   "NeurIPS":12,"ENLSP@NeurIPS":12,"IRDS (chapter)":12,"US Patent":12
 };
 const venueMonth = p => (p.m ?? VENUE_MONTH[p.v] ?? 6);
+const MONTHS = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+const VENUE_FULL = {
+  "ISCA":"International Symposium on Computer Architecture",
+  "MICRO":"IEEE/ACM International Symposium on Microarchitecture",
+  "HPCA":"IEEE International Symposium on High-Performance Computer Architecture",
+  "ASPLOS":"ACM International Conference on Architectural Support for Programming Languages and Operating Systems",
+  "DAC":"ACM/IEEE Design Automation Conference",
+  "ASP-DAC":"Asia and South Pacific Design Automation Conference",
+  "DATE":"Design, Automation & Test in Europe Conference",
+  "ISPASS":"IEEE International Symposium on Performance Analysis of Systems and Software",
+  "MLSys":"Conference on Machine Learning and Systems",
+  "IPDPS":"IEEE International Parallel & Distributed Processing Symposium",
+  "ISCAS":"IEEE International Symposium on Circuits and Systems",
+  "ISLPED":"IEEE/ACM International Symposium on Low Power Electronics and Design",
+  "NOCS":"IEEE/ACM International Symposium on Networks-on-Chip",
+  "ICCAD":"IEEE/ACM International Conference on Computer-Aided Design",
+  "ICCD":"IEEE International Conference on Computer Design",
+  "PACT":"International Conference on Parallel Architectures and Compilation Techniques",
+  "SC":"International Conference for High Performance Computing, Networking, Storage and Analysis",
+  "HotI":"IEEE Symposium on High-Performance Interconnects",
+  "Hot Chips":"IEEE Hot Chips Symposium",
+  "IISWC":"IEEE International Symposium on Workload Characterization",
+  "FPL":"International Conference on Field-Programmable Logic and Applications",
+  "ISQED":"International Symposium on Quality Electronic Design",
+  "SIGMETRICS":"ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems",
+  "ICS":"ACM International Conference on Supercomputing",
+  "ICML":"International Conference on Machine Learning",
+  "ICLR":"International Conference on Learning Representations",
+  "NeurIPS":"Conference on Neural Information Processing Systems",
+  "ICCV":"IEEE/CVF International Conference on Computer Vision",
+  "ECCV":"European Conference on Computer Vision",
+  "AAAI":"AAAI Conference on Artificial Intelligence",
+  "ISSCC":"IEEE International Solid-State Circuits Conference",
+  "Middleware":"ACM/IFIP International Middleware Conference",
+  "VLSI-SoC":"IFIP/IEEE International Conference on Very Large Scale Integration",
+  "NANOCOM":"ACM International Conference on Nanoscale Computing and Communication",
+  "CPAL":"Conference on Parsimony and Learning",
+  "HASP@MICRO":"International Workshop on Hardware and Architectural Support for Security and Privacy",
+  "ENLSP@NeurIPS":"NeurIPS Workshop on Efficient Natural Language and Speech Processing",
+  "IA³ @ SC":"Workshop on Irregular Applications: Architectures and Algorithms",
+  "NocArc":"International Workshop on Network on Chip Architectures",
+  "AISTECS":"International Workshop on Advanced Interconnect Solutions and Technologies for Emerging Computing Systems",
+  "SysML":"Conference on Systems and Machine Learning",
+  "NeuS":"Annual Conference on Neuro-Symbolic Learning and Reasoning",
+  "ICRC":"IEEE International Conference on Rebooting Computing",
+  "ICECS":"IEEE International Conference on Electronics, Circuits and Systems",
+  "IMS":"IEEE MTT-S International Microwave Symposium",
+  "RadarConf":"IEEE Radar Conference",
+  "IEEE SENSORS":"IEEE Sensors Conference",
+  "DAE-BRNS":"DAE-BRNS Theme Meeting on Materials Modeling",
+  "IEEE Micro":"IEEE Micro",
+  "IEEE JSSC":"IEEE Journal of Solid-State Circuits",
+  "IEEE TVLSI":"IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+  "IEEE TC":"IEEE Transactions on Computers",
+  "IEEE TPDS":"IEEE Transactions on Parallel and Distributed Systems",
+  "IEEE CAL":"IEEE Computer Architecture Letters",
+  "IEEE TCASAI":"IEEE Transactions on Circuits and Systems for Artificial Intelligence",
+  "IEEE T-Radar":"IEEE Transactions on Radar Systems",
+  "IEEE Computer":"IEEE Computer",
+  "ACM TACO":"ACM Transactions on Architecture and Code Optimization",
+  "ACM TOCS":"ACM Transactions on Computer Systems",
+  "ACM JETC":"ACM Journal on Emerging Technologies in Computing Systems",
+  "ACM SIGARCH CAN":"ACM SIGARCH Computer Architecture News",
+  "Synthesis Lectures":"Synthesis Lectures on Computer Architecture, Morgan & Claypool",
+  "Springer (chapter)":"Network-on-Chip Security and Privacy (Springer)",
+  "IRDS (chapter)":"IEEE International Roadmap for Devices and Systems",
+  "US Patent":"US Patent"
+};
+function venueLine(p){
+  const full = VENUE_FULL[p.v] || p.v;
+  if(p.t==="journal") return `In ${full}${p.si?` (${p.si})`:""}, ${p.y}.`;
+  if(p.t==="book") return `${full}, ${p.y}.`;
+  if(p.t==="chapter") return `In ${full}, ${p.y}.`;
+  if(p.t==="patent") return `${full}, ${p.y}.`;
+  const acr = p.v.split("@")[0].trim();
+  const mon = MONTHS[Math.floor(venueMonth(p))] || "";
+  return `In Proc. of the ${full} (${acr}), ${mon} ${p.y}.`;
+}
 
 let active = new Set();
 let query = "";
@@ -449,6 +527,7 @@ function renderList(){
       <div>
         <div class="ptitle">${p.title}</div>
         <div class="pauth">${boldName(p.a)}</div>
+        <div class="pmeta">${venueLine(p)}</div>
         ${p.note?`<span class="award">★ ${p.note}</span>`:""}
         <div class="ptags">${tagPills}</div>
       </div>
