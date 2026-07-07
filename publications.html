@@ -536,8 +536,20 @@ function renderList(){
   list.innerHTML = html;
   list.querySelectorAll(".tag").forEach(el => el.onclick = () => {
     const t = el.dataset.tag;
+    // remember the clicked paper and its position in the viewport
+    const pub = el.closest(".pub");
+    const beforeTop = pub ? pub.getBoundingClientRect().top : 0;
+    const titleText = pub ? pub.querySelector(".ptitle").textContent : null;
     active.clear(); active.add(t);
     renderDirections(); renderList();
+    // scroll so the same paper stays under the cursor (no jump to top)
+    if(titleText){
+      const match = [...list.querySelectorAll(".ptitle")].find(n => n.textContent === titleText);
+      if(match){
+        const afterTop = match.closest(".pub").getBoundingClientRect().top;
+        window.scrollTo({ top: window.scrollY + (afterTop - beforeTop), behavior: "instant" });
+      }
+    }
   });
 }
 
