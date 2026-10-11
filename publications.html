@@ -111,12 +111,12 @@
   <p class="intro">A complete, filterable record of refereed papers, books, and patents. Use the search box, or click a research direction to filter. Each paper is tagged by one or more directions — many sit at the intersection of several.</p>
   <div class="statline">
     <div class="s"><b id="stat-count">0</b>publications</div>
-    <div class="s"><b>24,600+</b>citations</div>
-    <div class="s"><b>54</b>h-index</div>
+    <div class="s"><b>24,700+</b>citations</div>
+    <div class="s"><b>55</b>h-index</div>
     <div class="s"><b>150</b>i10-index</div>
     <div class="s"><a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ" target="_blank">Google Scholar ↗</a> · <a href="http://dblp.uni-trier.de/pers/hd/k/Krishna:Tushar" target="_blank">DBLP ↗</a></div>
   </div>
-  <div class="asof">Citation metrics from Google Scholar · last updated September 2026 · refreshed monthly</div>
+  <div class="asof">Citation metrics from Google Scholar · last updated October 2026 · refreshed monthly</div>
 </div></header>
 
 <div class="directions"><div class="wrap">
@@ -163,8 +163,10 @@ const TAGS = {
 };
 
 const PUBS = [
+  {y:2026,m:12,v:"NeurIPS",t:"conf",title:"Polestar: Drift-Aware Cache Calibration and Token Commitment for Efficient Inference of Diffusion LLMs",a:"Mingyu Lee, Akshat Ramachandran, Souvik Kundu, Tushar Krishna",tags:["llm"]},
   {y:2026,v:"ICCAD",t:"conf",title:"Demystifying AI Platform Design for Distributed Inference of Next-Generation LLM Models",a:"Abhimanyu Bambhaniya, Ritik Raj, Geonhwa Jeong, Souvik Kundu, Sudarshan Srinivasan, Suvinay Subramanian, Midhilesh Elavazhagan, Madhu Kumar, Tushar Krishna",tags:["dist","llm","sim"]},
   {y:2026,m:11.5,v:"SC",t:"conf",title:"MIST: A Co-Design Framework for Heterogeneous, Multi-Stage LLM Inference",a:"Abhimanyu Rajeshkumar Bambhaniya, Hanjiang Wu, Suvinay Subramanian, Sudarshan Srinivasan, Souvik Kundu, Amir Yazdanbakhsh, Midhilesh Elavazhagan, Madhu Kumar, Minlan Yu, Arijit Raychowdhury, Tushar Krishna",tags:["dist","llm","sim"]},
+  {y:2026,m:8,v:"SIGCOMM",t:"conf",title:"DynamoServe: A Distributed Tiered Memory System for Multi-tenant LLM Serving",a:"Diman Zad Tootaghaj, Khaled Diab, Bob Lantz, Hanjiang Wu, K. K. Ramakrishnan, Md Ashfaqur Rahaman, Ryan Stutsman, Puneet Sharma, Tushar Krishna",tags:["llm","memory","dist"]},
   {y:2026,m:7.5,v:"DAC",t:"conf",title:"Enabling AI ASICs for Zero Knowledge Proof",a:"Jianming Tong, Jingtian Dang, Simon Langowski, Tianhao Huang, Asra Ali, Jeremy Kun, Jevin Jiang, Srinivas Devadas, Tushar Krishna",tags:["accel","security"]},
   {y:2026,v:"ICS",t:"conf",title:"Closing the Efficiency Gap: AI Datacenter Co-design Roadmap for Scalable Training of LLMs",a:"Jesmin Jahan Tithi, Hanjiang Wu, Joongun Park, Avishaii Abuhatzera, Fabrizio Petrini, Tushar Krishna",tags:["dist","llm","sim"]},
   {y:2026,v:"ICML",t:"conf",note:"Spotlight",title:"ThunderAgent: A Fast, Simple, and Program-Aware Agentic Inference System",a:"Hao Kang, Ziyang Li, Xinyu Yang, Weili Xu, Yinfang Chen, Junxiong Wang, Beidi Chen, Tushar Krishna, Chenfeng Xu, Simran Arora",tags:["compai","llm"]},
@@ -183,6 +185,7 @@ const PUBS = [
   {y:2026,m:4,v:"ISPASS",t:"conf",title:"Towards System-2 AI: Workloads and Characterizations of Energy-Based Models",a:"Hanchen Yang, Jiayi Qian, Zishen Wan, Jingtian Dang, Ziwei Li, Yilun Du, Tushar Krishna",tags:["compai","sim"]},
   {y:2026,v:"DATE",t:"conf",title:"FortiSky: Enhancing Adversarial and Bit-Error Robustness for Efficient and Secure Autonomous Systems",a:"Zishen Wan, Karthik Swaminathan, Nandhini Chandramoorthy, Pin-Yu Chen, Tushar Krishna, Vijay Janapa Reddi, Arijit Raychowdhury",tags:["edge","security"]},
   {y:2026,v:"ISCA",t:"conf",title:"Scalable Synthesis of Distributed LLM Workloads Through Symbolic Tensor Graphs",a:"Changhai Man, Joongun Park, Hanjiang Wu, Huan Xu, Srinivas Sridharan, Tushar Krishna",tags:["dist","sim"]},
+  {y:2026,v:"IEEE CAL",t:"journal",title:"SCALE-Sim TPU: Validating and Extending SCALE-Sim for TPUs",a:"Jingtian Dang, Ritik Raj, Changhai Man, Jianming Tong, Tushar Krishna",tags:["sim","accel"]},
   {y:2026,v:"IEEE JSSC",t:"journal",title:"A 40-nm Programmable Heterogeneous SoC With 5.625/0.85 MB RRAM/SRAM for Accelerating Neuro-Symbolic AI Models",a:"Che-Kai Liu, Zishen Wan, Yi-Sheng Noh, Mohamed Ibrahim, Samuel Spetalnick, Tushar Krishna, Win-San Khwa, Ashwin S. Lele, Yu-Der Chih, Meng-Fan Chang, Arijit Raychowdhury",tags:["compai","accel","emerging"]},
   {y:2026,v:"IEEE Micro",t:"journal",title:"Demystifying the Cost Versus Benefits of Sparse Large Language Model Acceleration",a:"Abhimanyu Rajeshkumar Bambhaniya, Sheng-Chun Kao, Geonhwa Jeong, Suvinay Subramanian, Amir Yazdanbakhsh, Tushar Krishna",tags:["accel","llm","sim"]},
   {y:2026,v:"IEEE TVLSI",t:"journal",title:"Algorithm-Hardware Co-Design of Digital Compute-in-Memory Architecture Supporting Flexible and Temporal N:M Sparsity",a:"Akshat Ramachandran, Souvik Kundu, Arnab Raha, Shamik Kundu, Deepak A. Mathaikutty, Tushar Krishna",tags:["accel","emerging","llm"]},
