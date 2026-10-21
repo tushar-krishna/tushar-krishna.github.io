@@ -101,6 +101,14 @@
   .svc-item{padding:9px 13px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.4}
   .svc-item:last-child{border-bottom:0}
   .svc-item b{color:var(--navy)}
+  /* applicant notice */
+  .notice{background:#fff8e1;border:1px solid #ecd58a;border-left:6px solid var(--gold);border-radius:6px;padding:20px 26px;margin-bottom:22px;box-shadow:0 1px 3px rgba(19,40,75,.06)}
+  .notice h2{font-family:var(--serif);font-size:20px;color:var(--navy);margin-bottom:10px}
+  .notice p{font-size:14.5px;color:var(--ink);margin-bottom:10px}
+  .notice p:last-child{margin-bottom:0}
+  .notice .formbtn{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:14px;padding:9px 16px;border-radius:4px;margin:2px 0 4px}
+  .notice .formbtn:hover{background:var(--navy2);color:#fff;text-decoration:none}
+  .notice .small{font-size:13px;color:var(--muted)}
   footer{background:var(--navy);color:rgba(255,255,255,.8);margin-top:14px}
   footer .in{max-width:1140px;margin:0 auto;padding:22px 26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
 </style>
@@ -109,7 +117,7 @@
 <div class="topbar"><div class="in">
   <div class="gt">Tushar Krishna</div>
   <div class="nav">
-    <a href="#">Home</a><a href="#research">Research</a><a href="publications.html">Publications</a><a href="#tools">Tools</a>
+    <a href="#">Home</a><a href="publications.html">Publications</a><a href="#tools">Tools</a>
     <a href="#teaching">Teaching</a><a href="#service">Service</a>
   </div>
 </div></div>
@@ -121,6 +129,7 @@
       <div class="pinfo">
         <h1>Tushar Krishna</h1>
         <div class="ttl">Associate Professor</div>
+        <div class="ttl">Co-Founder &amp; CEO, InfraVana</div>
         <div class="dept">School of Electrical &amp; Computer Engineering<br>School of Computer Science (Adjunct)<br>Georgia Institute of Technology</div>
         <div class="quote">“Cogito, ergo sum”<span>— René Descartes</span></div>
       </div>
@@ -147,34 +156,23 @@
   <main>
     <div class="block" id="bio">
       <h2>Biography</h2>
-      <p class="lead">Tushar Krishna is an Associate Professor in the School of Electrical &amp; Computer Engineering at Georgia Tech, with a courtesy appointment in Computer Science. He held the ON Semiconductor (Endowed) Junior Professorship in ECE from 2019–2021, and has been a visiting professor at MIT EECS + CSAIL and Harvard CS, and a researcher in Intel's VSSAD group. He earned his Ph.D. in EECS from MIT (2014), an M.S.E. from Princeton (2009), and a B.Tech. from IIT Delhi (2007).</p>
-      <p>Krishna's research spans computer architecture, interconnection networks, networks-on-chip, and AI/ML accelerator systems — with a focus on optimizing data movement in modern computing platforms. His research has been funded by awards from NSF, DARPA, IARPA, SRC (JUMP 2.0), the Department of Energy, Intel, Google, Meta, Qualcomm and TSMC. His papers have been cited ~24,000 times, and he is a member of the Halls of Fame of all three premier computer architecture conferences — MICRO, HPCA, and ISCA.</p>
-      <p>Krishna won the 2026 <a href="https://ece.gatech.edu/news/2026/08/krishna-earns-one-computer-architectures-highest-mid-career-honors" target="_blank">ACM SIGARCH Maurice Wilkes Award</a> “for outstanding contributions to architectures and modeling tools for large-scale AI systems,” and was a recipient of the <a href="https://ece.gatech.edu/news/2025/10/krishna-wins-under-40-innovators-award-ai-computing-design-tools" target="_blank">“Under 40 Innovators Award”</a> at DAC in 2025. At Georgia Tech, he has been honored by the “Roger P. Webb Outstanding Mid-career Faculty Award” and “Roger P. Webb Outstanding Junior Faculty Award” from the School of ECE in 2024 and 2021 respectively, the “Richard M. Bass/Eta Kappa Nu Outstanding Junior Teacher Award” in 2023, and the “Class of 1940 Course Survey Teaching Effectiveness Award” in 2018.</p>
-      <p>Dr. Krishna currently serves as a Co-Director for the Center for Research into Novel Computing Hierarchies (CRNCH) – a cross-disciplinary research center at Georgia Tech. He is also a co-chair of the Chakra Execution Traces and Benchmarks Working group within ML Commons. He served as Program Vice-Chair for ISCA 2023 and Program Co-Chair for MICRO 2026.</p>
+      <p class="lead">Tushar Krishna is an Associate Professor in the School of Electrical &amp; Computer Engineering at Georgia Tech, with a courtesy appointment in Computer Science. He is also the Co-Founder and CEO of InfraVana. He held the ON Semiconductor (Endowed) Junior Professorship in ECE from 2019–2021, and has been a visiting professor at MIT EECS + CSAIL and Harvard CS, and a researcher in Intel's VSSAD group. He earned his Ph.D. in EECS from MIT (2014), an M.S.E. from Princeton (2009), and a B.Tech. from IIT Delhi (2007).</p>
+      <p>Krishna's research spans computer architecture, interconnection networks, networks-on-chip, and AI/ML accelerator systems — with a focus on optimizing data movement in modern computing platforms. His research has been funded by awards from NSF, DARPA, IARPA, SRC (JUMP 2.0), the Department of Energy, Intel, Google, Meta, Qualcomm and TSMC. His papers have been cited over 24,000 times, and he is a member of the Halls of Fame of all three premier computer architecture conferences — MICRO, HPCA, and ISCA.</p>
+      <p>Krishna won the 2026 <a href="https://ece.gatech.edu/news/2026/08/krishna-earns-one-computer-architectures-highest-mid-career-honors" target="_blank"><em>ACM SIGARCH Maurice Wilkes Award</em></a> “for outstanding contributions to architectures and modeling tools for large-scale AI systems,” and was a recipient of the <a href="https://ece.gatech.edu/news/2025/10/krishna-wins-under-40-innovators-award-ai-computing-design-tools" target="_blank"><em>Under 40 Innovators Award</em></a> at DAC in 2025. At Georgia Tech, he has been honored by the <em>Roger P. Webb Outstanding Mid-career Faculty Award</em> and <em>Roger P. Webb Outstanding Junior Faculty Award</em> from the School of ECE in 2024 and 2021 respectively, the <em>Richard M. Bass/Eta Kappa Nu Outstanding Junior Teacher Award</em> in 2023, and the <em>Class of 1940 Course Survey Teaching Effectiveness Award</em> in 2018.</p>
+      <p>Dr. Krishna currently serves as a Co-Director for the Center for Research into Novel Computing Hierarchies (CRNCH) – a cross-disciplinary research center at Georgia Tech. He is also a co-chair of the Chakra Execution Traces and Benchmarks Working group within ML Commons. He served as Program Co-Chair for ISCA 2023 and MICRO 2026.</p>
       <div class="edu">
         <div class="e"><div class="y">Ph.D. · 2014</div><h3>MIT</h3><p>Electrical Engineering &amp; Computer Science</p></div>
         <div class="e"><div class="y">M.S.E. · 2009</div><h3>Princeton</h3><p>Electrical Engineering</p></div>
-        <div class="e"><div class="y">B.Tech. · 2007</div><h3>IIT Delhi</h3><p>Electrical Engineering (Honors)</p></div>
+        <div class="e"><div class="y">B.Tech. · 2007</div><h3>IIT Delhi</h3><p>Electrical Engineering</p></div>
       </div>
     </div>
 
-    <div class="block" id="research">
-      <h2>Research Interests</h2>
-      <p class="sub">The directions used to organize and tag the full publication list.</p>
-      <div class="int">
-        <span>AI/ML Accelerators</span>
-        <span>Compositional &amp; Cognitive AI</span>
-        <span>Distributed AI Systems</span>
-        <span>Efficient LLM &amp; Model Inference</span>
-        <span>AI-Assisted Design</span>
-        <span>Interconnection &amp; On-Chip Networks</span>
-        <span>Simulation &amp; Benchmarking</span>
-        <span>Emerging Tech &amp; Packaging</span>
-        <span>Memory &amp; Virtual-Memory Systems</span>
-        <span>Edge &amp; Embodied Computing</span>
-        <span>Privacy &amp; Security</span>
-      </div>
-      <a class="jumplink" href="publications.html">Browse publications by these topics →</a>
+    <div class="notice" id="applicants">
+      <h2>Note to Prospective MS / PhD Applicants</h2>
+      <p><b>I will not be hiring any new MS or PhD students in 2027.</b> Prospective PhD students interested in computer architecture and AI systems are strongly encouraged to apply to Georgia Tech's <a href="https://ece.gatech.edu" target="_blank">School of Electrical &amp; Computer Engineering (ECE)</a> and <a href="https://scs.gatech.edu" target="_blank">School of Computer Science (SCS)</a> PhD programs, which have many excellent faculty working in these areas.</p>
+      <p><b>Current Georgia Tech students</b> looking for research projects with my lab: please fill out this form.<br>
+      <a class="formbtn" href="https://forms.gle/g6y75144N7KLU8pP9" target="_blank">GT Student Project Interest Form &rarr;</a></p>
+      <p class="small">Given the volume of email I receive, individual emails about MS/PhD admissions or projects will likely not receive a response. Please use the form instead.</p>
     </div>
 
     <div class="block" id="tools">
